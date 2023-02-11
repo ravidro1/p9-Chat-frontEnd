@@ -1,0 +1,81 @@
+.main-menu {
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 0;
+
+  display: flex;
+  justify-content: flex-end;
+}
+
+.menuWindow-menu {
+  width: 25%;
+  height: 100%;
+  background-color: aqua;
+  position: relative;
+  left: 25%;
+}
+
+.restOfTheAreaMenu-menu{
+  width: 75%;
+  height: 100%;
+  background-color: transparent;
+}
+
+.main-menuIn-Animation {
+  animation: blackScreenIn 2.3s forwards;
+}
+
+.main-menuOut-Animation {
+  animation: blackScreenOut 2.3s forwards;
+}
+
+@keyframes blackScreenIn {
+  from {
+    background-color: transparent;
+    z-index: -1;
+  }
+  to {
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 2;
+  }
+}
+
+@keyframes blackScreenOut {
+  from {
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 2;
+  }
+  to {
+    background-color: transparent;
+    z-index: -1;
+  }
+}
+
+.slide-left {
+  animation: slide-left 1s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+}
+
+@keyframes slide-left {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+
+.slide-right {
+  animation: slide-right 1s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+}
+
+@keyframes slide-right {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(0%);
+  }
+}

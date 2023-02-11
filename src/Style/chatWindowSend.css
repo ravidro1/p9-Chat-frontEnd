@@ -1,0 +1,55 @@
+.main-chatWindowSendMessage {
+  width: 100%;
+  height: 7%;
+
+  background-color: white;
+  
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.input-chatWindowSendMessage {
+  width: 85%;
+  height: 95%;
+  /* border-radius: 0.4vw; */
+  padding-left: 4%;
+  border: none;
+  font-family: "Roboto Condensed", sans-serif;
+  font-size: 100%;
+
+  border-top: 1px rgb(173, 173, 173) solid;
+}
+
+
+.input-chatWindowSendMessage:focus {
+  outline: none;
+
+}
+
+.input-chatWindowSendMessage:focus::placeholder {
+  color: black;
+}
+
+
+.sendButton-chatWindowSendMessage {
+  width: 10%;
+  height: 60%;
+  /* border: 0.2vw solid black; */
+  border-radius: 0.4vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: 2%;
+  border: none;
+
+  background-color: rgb(255, 255, 255);
+
+  font-family: "Roboto Condensed", sans-serif;
+}
+
+.sendButton-chatWindowSendMessage:hover {
+  background-color: rgb(216, 216, 216);
+  cursor: pointer;
+}

@@ -1,0 +1,62 @@
+.main-contantSection {
+  width: 100%;
+  height: 100%;
+  background-color: #ebebeb;
+  border-right: 1px solid rgba(0, 0, 0, 0.199);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.recentWord-contantSection {
+  color: #05728f;
+  font-weight: 700;
+  font-size: 1.7vw;
+}
+
+.Continer-RoomSearchBox-contantSection {
+  height: 10%;
+  padding-left: 8%;
+  padding-right: 8%;
+  background-color: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid #c4c4c4;
+}
+
+.RoomSearchBox-contantSection {
+  width: 50%;
+  height: 70%;
+  padding-left: 4%;
+  font-family: "Secular One", sans-serif;
+
+  border: none;
+  color: black;
+  outline: none;
+
+  border-bottom: 1px solid rgba(0, 0, 0, 0.123);
+
+  background-color: transparent;
+  font-size: 1vw;
+
+}
+
+.RoomSearchBox-contantSection::placeholder {
+  font-size: 1vw;
+}
+
+
+
+.RoomSearchBox-contantSection:focus::placeholder {
+  color: rgba(0, 0, 0);
+}
+
+.contactList-contactSection {
+  width: 100%;
+  height: 90%;
+  overflow: hidden;
+  overflow-y: scroll;
+  direction: rtl;
+}

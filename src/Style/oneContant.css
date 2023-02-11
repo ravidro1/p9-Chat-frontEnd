@@ -1,0 +1,114 @@
+.main-oneContant {
+  background-color: whitesmoke;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.199);
+  border-left: 1px solid rgba(0, 0, 0, 0.199);
+
+  width: 100%;
+  min-height: 13%;
+  max-height: 13%;
+
+  color: black;
+
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-between;
+  /* font-family: "Secular One", sans-serif; */
+  font-family: sans-serif;
+  direction: ltr;
+
+  overflow: hidden;
+
+  padding-left: 3%;
+  padding-right: 3%;
+  padding-top: 2%;
+  padding-bottom: 3%;
+}
+
+.main-oneContant:hover {
+  background-color: rgba(128, 128, 128, 0.205);
+}
+
+.roomName-oneContant {
+  font-size: 120%;
+  font-weight: 400;
+  padding-bottom: 0.3vw;
+}
+
+.lastMessage-oneContant {
+  font-size: 85%;
+  font-weight: 200;
+  color: rgb(0, 0, 0);
+
+  /* padding-top: 0.5vw; */
+
+  word-break: keep-all;
+  white-space: nowrap;
+}
+
+.lastMessage-creationTime-oneContant {
+  width: 100%;
+  font-size: 70%;
+  text-align: end;
+}
+
+.roomCreationTime-oneContant {
+  width: 100%;
+  font-size: 85%;
+  text-align: start;
+  height: max-content;
+}
+
+.typing-oneContant {
+  font-size: 100%;
+  padding-bottom: 5%;
+
+
+  color: green;
+
+  /* background-clip: text;
+  color: transparent; */
+  /* animation: gradient-text 0.5s infinite; */
+
+}
+
+/* font-size: clamp(10px, 2.5vw, 30px); */
+
+/* @keyframes gradient-text {
+  0% {
+    background-image: linear-gradient(
+      to right,
+      rgb(35, 240, 68),
+      rgb(22, 133, 21),
+      rgb(44, 4, 4)
+    );
+  }
+  33% {
+    background-image: linear-gradient(
+      to right,
+      rgb(44, 4, 4)
+      rgb(35, 240, 68),
+      rgb(22, 133, 21),
+    );
+  }
+  66% {
+    background-image: linear-gradient(
+      to right,
+      rgb(22, 133, 21),
+      rgb(44, 4, 4)
+      rgb(35, 240, 68),
+    );
+  }
+  100% {
+    background-image: linear-gradient(
+      to right,
+      rgb(35, 240, 68),
+      rgb(22, 133, 21),
+      rgb(44, 4, 4)
+    );
+  }
+} */
+
+
+
+
