@@ -33,7 +33,9 @@ const CreateRoom: React.FC<Props> = () => {
 
   useEffect(() => {
     socket.on("recive-newRoom", (receive: roomType) => {
-      joinSingelRoomToSocket(receive, socket);
+      console.log(receive);
+      if(receive._id) joinSingelRoomToSocket(receive._id, socket);
+      
       setAllUserRooms((prev: roomType[]): roomType[] => [...prev, receive]);
     });
     return () => {
@@ -58,7 +60,7 @@ const CreateRoom: React.FC<Props> = () => {
       (newRoom: roomType) => {
         if (allUserRooms && idAndToken?.id) {
           setAllUserRooms([...allUserRooms, newRoom]);
-          joinSingelRoomToSocket(newRoom, socket);
+          if (newRoom._id) joinSingelRoomToSocket(newRoom._id, socket);
           setNewRoomData({name: "", participants: [idAndToken?.id]});
         }
       }

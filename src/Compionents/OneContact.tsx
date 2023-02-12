@@ -11,6 +11,7 @@ import {DataContext} from "../Contexts/DataContextProvider";
 import {FunctionContext} from "../Contexts/FunctionsContextProvider";
 import {SizeContext} from "../Contexts/SizesContextProvider";
 import {socket} from "../App";
+import axios from "axios";
 
 interface Props {
   oneRoom: roomType;
@@ -18,11 +19,13 @@ interface Props {
 
 const OneContact: React.FC<Props> = ({oneRoom}) => {
   const {
+    idAndToken,
     setCurrentRoom,
     allUserMessages,
     currentUser,
     currentRoom,
     typingQueue,
+    setAllUserRooms,
   } = useContext(DataContext) as TypeDataContext;
 
   const {getTimeInString} = useContext(FunctionContext) as TypeFunctionsContext;
@@ -42,6 +45,26 @@ const OneContact: React.FC<Props> = ({oneRoom}) => {
       false,
       currentRoom?._id
     );
+
+    setAllUserRooms((prev) => {
+      const roomIndex = prev.findIndex((item) => item._id == oneRoom?._id);
+      const copyOfArray = [...prev];
+      copyOfArray[roomIndex] = {
+        ...copyOfArray[roomIndex],
+        numberOfUnreadMessages: 0,
+      };
+      return copyOfArray;
+    });
+
+    axios
+      .post("http://localhost:8001/UpdateUnreadMessage", {
+        id: idAndToken?.id,
+        roomID: oneRoom?._id,
+        newUnreadMessagesNumber: 0,
+      })
+      .then((res) => console.log(res.data))
+      .catch((err) => console.log(err));
+
     setCurrentRoom(oneRoom);
   };
 
@@ -93,9 +116,16 @@ const OneContact: React.FC<Props> = ({oneRoom}) => {
 
   return (
     <div onClick={changeCurrentRoom} className="main-oneContant">
-      <div className="roomName-oneContant">
-        {" "}
-        <strong> {oneRoom.name} </strong>{" "}
+      <div className="Continer-roomName-oneContant">
+        <div className="roomName-oneContant">
+          <strong> {oneRoom.name} </strong>
+        </div>
+
+        {Number(oneRoom?.numberOfUnreadMessages) > 0 && (
+          <div className="numberOfUnreadMessages-oneContant">
+            {oneRoom.numberOfUnreadMessages}
+          </div>
+        )}
       </div>
 
       {lastMessage &&

@@ -3,12 +3,7 @@ import react, {useContext, useEffect, useState} from "react";
 import ChatWindow from "../Compionents/ChatWindow";
 import ContactWindow from "../Compionents/ContactSection";
 import CreateRoom from "../Compionents/CreateRoom";
-import {
-  roomType,
-  TypeDataContext,
-  TypeFunctionsContext,
-  TypeMessage,
-} from "../types";
+import {TypeDataContext, TypeFunctionsContext, TypeMessage} from "../types";
 import "../Style/homePage.css";
 import NavBar from "../Compionents/NavBar";
 import LoginExistCheck from "../Compionents/LoginExistCheck";
@@ -21,37 +16,15 @@ interface Props {}
 const HomePage: React.FC<Props> = () => {
   const {
     setAllUserRooms,
+    idAndToken,
+    currentRoom,
     setAllUserMessages,
-    allUserRooms,
-    typingQueue,
     setTypingQueue,
   } = useContext(DataContext) as TypeDataContext;
-  const {joinAllRoomToSocket} = useContext(
+
+  const {getAllUserRoom, getAllUserMessages} = useContext(
     FunctionContext
   ) as TypeFunctionsContext;
-
-  const getAllUserRoom = (id: string) => {
-    axios
-      .post("http://localhost:8001/GetAllRooms", {id})
-      .then((res) => {
-        joinAllRoomToSocket(res.data.rooms, socket);
-        setAllUserRooms(res.data.rooms);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
-
-  const getAllUserMessages = (id: string) => {
-    axios
-      .post("http://localhost:8001/GetAllUserMessages", {id})
-      .then((res) => {
-        setAllUserMessages(res.data.data);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
 
   const {checkIfLogin} = LoginExistCheck();
 
@@ -60,14 +33,58 @@ const HomePage: React.FC<Props> = () => {
 
     const id = sessionStorage.getItem("id");
     if (typeof id == "string") {
-      getAllUserRoom(JSON.parse(id));
+      getAllUserRoom(JSON.parse(id), socket);
       getAllUserMessages(JSON.parse(id));
     }
   }, []);
 
+  const [messageRecive, setMessageRecive] = useState<TypeMessage>();
+
   useEffect(() => {
-    console.log(typingQueue);
-  }, [typingQueue]);
+    setAllUserRooms((prev) => {
+      let roomIndex = prev.findIndex((item) => item._id == messageRecive?.room);
+      const copyOfArray = [...prev];
+
+      if (
+        copyOfArray[roomIndex] &&
+        currentRoom?._id != copyOfArray[roomIndex]._id
+      ) {
+        copyOfArray[roomIndex] = {
+          ...copyOfArray[roomIndex],
+          numberOfUnreadMessages: copyOfArray[roomIndex].numberOfUnreadMessages
+            ? Number(copyOfArray[roomIndex]?.numberOfUnreadMessages) + 1
+            : 1,
+        };
+      } else if (currentRoom?._id == copyOfArray[roomIndex]?._id) {
+
+        axios
+          .post("http://localhost:8001/UpdateUnreadMessage", {
+            id: idAndToken?.id,
+            roomID: currentRoom?._id,
+            newUnreadMessagesNumber: 0,
+          })
+          .then((res) => console.log(res.data))
+          .catch((err) => console.log(err));
+      }
+
+      return copyOfArray;
+    });
+  }, [messageRecive]);
+
+  useEffect(() => {
+    socket.on("recive-message", (recive: TypeMessage) => {
+      setAllUserMessages((prev: TypeMessage[]): TypeMessage[] => [
+        ...prev,
+        recive,
+      ]);
+
+      setMessageRecive(recive);
+    });
+
+    return () => {
+      socket.off("recive-message");
+    };
+  }, []);
 
   useEffect(() => {
     socket.on(
@@ -96,7 +113,6 @@ const HomePage: React.FC<Props> = () => {
                   senders: tempSenders,
                 };
               }
-
             } else {
               copyOfArray.push({roomID: roomID, senders: [sender]});
             }
@@ -113,19 +129,6 @@ const HomePage: React.FC<Props> = () => {
 
           return copyOfArray;
         });
-
-        // setAllUserRooms((prev) => {
-        //   const roomIndex = prev?.findIndex((room) => room._id == roomID);
-        //   const copyOfArray = [...prev];
-
-        //   // console.log(roomIndex);
-
-        //   copyOfArray[roomIndex] = {
-        //     ...copyOfArray[roomIndex],
-        //     isTyping: {typing, sender},
-        //   };
-        //   return copyOfArray;
-        // });
       }
     );
 
@@ -140,7 +143,7 @@ const HomePage: React.FC<Props> = () => {
         <NavBar />
       </div>
 
-      {/* <CreateRoom /> */}
+      <CreateRoom />
 
       <div className="lowerSection-homePage">
         <div className="lowerSection-leftSide-homePage">

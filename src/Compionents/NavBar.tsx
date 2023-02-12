@@ -17,20 +17,19 @@ const NavBar: React.FC<Props> = () => {
     <div className="main-NavBar">
       <img className="logo-NavBar" src="RaviChat.png" alt="logo" />
 
-      {/* <Menu showMenu={showMenu} setShowMenu={setShowMenu} />
+      {showMenu != null && (
+        <Menu showMenu={showMenu} setShowMenu={setShowMenu} />
+      )}
 
-      <MenuIcon
-        showMenu={showMenu}
-        setShowMenu={setShowMenu}
-        classes={
-          showMenu != null
-            ? showMenu
-              ? "rotate-90-open"
-              : "rotate-90-close"
-            : ""
-        }
-        height="50%"
-      /> */}
+      
+        <div
+          className="menuIconContiner-navBar"
+          onClick={() => {
+            showMenu ? setShowMenu(!showMenu) : setShowMenu(true);
+          }}
+        >
+          <MenuIcon height="35px" />
+        </div>
     </div>
   );
 };

@@ -15,7 +15,9 @@ export type roomType = {
   creationTime?: Date;
   creator?: string;
 
-  isTyping?: {sender: string; typing: boolean};
+  numberOfUnreadMessages?: number;
+
+  // isTyping?: {sender: string; typing: boolean};
 };
 
 export type TypeMessage = {
@@ -69,5 +71,8 @@ export type TypeFunctionsContext = {
   getTimeInString: (time: Date) => {hour: string; date: string};
   convertIDToUserObject: (id: string) => Promise<userType | undefined>;
   joinAllRoomToSocket: (allRooms: roomType[], socket: any) => void;
-  joinSingelRoomToSocket: (singelRoom: roomType, socket: any) => void;
+  joinSingelRoomToSocket: (singelRoomID: string, socket: any) => void;
+
+  getAllUserRoom: (id: string, socket: any) => void;
+  getAllUserMessages: (id: string) => void;
 };

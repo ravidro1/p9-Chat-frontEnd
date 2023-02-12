@@ -2,22 +2,15 @@ import "../Style/menuIcon.css";
 
 interface Props {
   height: string;
-  classes: string;
-  showMenu: boolean | null;
-  setShowMenu: (state: boolean) => void;
+  classes?: string;
 }
 
 const MenuIcon: React.FC<Props> = ({
   height,
   classes,
-  showMenu,
-  setShowMenu,
 }) => {
   return (
     <div
-      onClick={() => {
-        showMenu ? setShowMenu(!showMenu) : setShowMenu(true);
-      }}
       className={"main-MenuIcon " + classes}
       style={{height}}
     >

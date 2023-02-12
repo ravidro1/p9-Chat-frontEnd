@@ -8,6 +8,7 @@ import ChatWindowSendMessage from "./ChatWindowSendMessage";
 
 import "../Style/chatWindow.css";
 import {DataContext} from "../Contexts/DataContextProvider";
+import { socket } from "../App";
 
 interface Props {}
 
@@ -29,10 +30,10 @@ const ChatWindow: React.FC<Props> = ({}) => {
     }
   }, [currentRoom, allUserMessages]);
 
+
+
   return (
-    <div
-      className="main-chatWindow"
-    >
+    <div className="main-chatWindow">
       {currentRoom ? (
         <>
           <ChatWindowHeader />

@@ -28,11 +28,27 @@
 .main-oneContant:hover {
   background-color: rgba(128, 128, 128, 0.205);
 }
+.Continer-roomName-oneContant {
+  display: flex;
+  justify-content: space-between;
+  padding-bottom: 0.3vw;
+  width: 100%;
+}
 
 .roomName-oneContant {
   font-size: 120%;
   font-weight: 400;
-  padding-bottom: 0.3vw;
+}
+
+.numberOfUnreadMessages-oneContant {
+  font-size: 80%;
+  background-color: rgba(128, 128, 128, 0.205);
+  border-radius: 50%;
+  aspect-ratio: 1/1;
+  padding-inline: 6%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .lastMessage-oneContant {
@@ -63,13 +79,11 @@
   font-size: 100%;
   padding-bottom: 5%;
 
-
   color: green;
 
   /* background-clip: text;
   color: transparent; */
   /* animation: gradient-text 0.5s infinite; */
-
 }
 
 /* font-size: clamp(10px, 2.5vw, 30px); */
@@ -108,7 +122,3 @@
     );
   }
 } */
-
-
-
-

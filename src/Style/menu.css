@@ -13,23 +13,26 @@
 .menuWindow-menu {
   width: 25%;
   height: 100%;
-  background-color: aqua;
-  position: relative;
-  left: 25%;
+  background-color: whitesmoke;
+  position: fixed;
+  right: -25%;
+  top: 0;
+  z-index: 2;
+  border-left: 1px solid black;
 }
 
-.restOfTheAreaMenu-menu{
+.restOfTheAreaMenu-menu {
   width: 75%;
   height: 100%;
   background-color: transparent;
 }
 
 .main-menuIn-Animation {
-  animation: blackScreenIn 2.3s forwards;
+  animation: blackScreenIn 1s forwards;
 }
 
 .main-menuOut-Animation {
-  animation: blackScreenOut 2.3s forwards;
+  animation: blackScreenOut 1s forwards;
 }
 
 @keyframes blackScreenIn {
@@ -55,27 +58,45 @@
 }
 
 .slide-left {
-  animation: slide-left 1s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+  animation: slide-left 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
 }
 
 @keyframes slide-left {
-  0% {
+  from {
     transform: translateX(0);
+    /* display: none; */
   }
-  100% {
+  to {
     transform: translateX(-100%);
+    /* display: block; */
   }
 }
 
 .slide-right {
-  animation: slide-right 1s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+  animation: slide-right 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
 }
 
 @keyframes slide-right {
-  0% {
+  from {
     transform: translateX(-100%);
+    /* display: block; */
   }
-  100% {
+  to {
     transform: translateX(0%);
+    /* display: none; */
   }
+}
+
+.rotete{
+  transform: rotate(90deg);
+
+}
+
+
+.menuIconContiner-menu{
+  position: absolute;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  padding-right: 1.5%;
 }

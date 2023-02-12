@@ -6,41 +6,43 @@ import "../Style/chatWindowSend.css";
 import {DataContext} from "../Contexts/DataContextProvider";
 
 const ChatWindowSendMessage: React.FC<{}> = ({}) => {
-  const {currentRoom, currentUser, allUserMessages, setAllUserMessages} =
-    useContext(DataContext) as TypeDataContext;
+  const {
+    currentRoom,
+    currentUser,
+    allUserMessages,
+    setAllUserRooms,
+    setAllUserMessages,
+  } = useContext(DataContext) as TypeDataContext;
 
   const [tempMessageContent, setTempMessageContent] = useState<string>("");
 
-  useEffect(() => {
-    socket.on("recive-message", (recive: TypeMessage) => {
-      setAllUserMessages((prev: TypeMessage[]): TypeMessage[] => [
-        ...prev,
-        recive,
-      ]);
-    });
-    return () => {
-      socket.off("recive-message");
-    };
-  }, []);
+  const [isSuccess, setIsSuccess] = useState(true);
 
   const sendMessage = () => {
-    setTempMessageContent("");
-
-    if (currentUser && currentRoom?._id && tempMessageContent) {
-      let newMessage: TypeMessage = {
-        from: currentUser.username,
-        room: currentRoom._id,
-        content: tempMessageContent,
-      };
-      socket.emit("newMessage", newMessage, (id: string, currentTime: Date) => {
-        const newMessageWithID = {
-          ...newMessage,
-          _id: id,
-          creationTime: currentTime,
+    if (isSuccess) {
+      setTempMessageContent("");
+      setIsSuccess(false);
+      if (currentUser && currentRoom?._id && tempMessageContent) {
+        let newMessage: TypeMessage = {
+          from: currentUser.username,
+          room: currentRoom._id,
+          content: tempMessageContent,
         };
-        if (allUserMessages)
-          setAllUserMessages((prev) => [...prev, newMessageWithID]);
-      });
+        socket.emit(
+          "newMessage",
+          newMessage,
+          (id: string, currentTime: Date) => {
+            const newMessageWithID = {
+              ...newMessage,
+              _id: id,
+              creationTime: currentTime,
+            };
+            if (allUserMessages)
+              setAllUserMessages((prev) => [...prev, newMessageWithID]);
+            setTimeout(() => setIsSuccess(true), 220);
+          }
+        );
+      }
     }
   };
 
@@ -50,14 +52,14 @@ const ChatWindowSendMessage: React.FC<{}> = ({}) => {
         "transmit-IsTyping",
         currentUser?.username,
         true,
-        currentRoom?._id,
+        currentRoom?._id
       );
     else
       socket.emit(
         "transmit-IsTyping",
         currentUser?.username,
         false,
-        currentRoom?._id,
+        currentRoom?._id
       );
   };
 

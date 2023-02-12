@@ -7,7 +7,7 @@ import {DataContext} from "../Contexts/DataContextProvider";
 interface Props {}
 
 const ContactWindow: React.FC<Props> = () => {
-  const {allUserRooms, setAllUserRooms, currentRoom, setCurrentRoom} =
+  const {allUserRooms, currentRoom, setCurrentRoom} =
     useContext(DataContext) as TypeDataContext;
 
   const [searchRoomList, setSearchRoomList] = useState<
@@ -25,11 +25,9 @@ const ContactWindow: React.FC<Props> = () => {
   }, [allUserRooms]);
 
   const updateRoomBySearch = (searchValue: string) => {
-    // console.log(searchValue);
     const searchedRoomArray = allUserRooms?.filter((room) =>
       room.name.includes(searchValue)
     );
-    // console.log(searchedRoomArray);
     setSearchRoomList(searchedRoomArray);
   };
 

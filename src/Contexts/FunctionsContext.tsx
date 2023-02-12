@@ -121,15 +121,41 @@ const FunctionsContext = (): TypeFunctionsContext => {
   const joinAllRoomToSocket = (allRooms: roomType[], socket: any) => {
     allRooms?.map((currentRoom) => {
       socket.emit("joinRoom", currentRoom._id, (room: string) => {
-        // console.log("join to room: " + room);
+        // coSnsole.log("join to room: " + room);
       });
     });
   };
 
-  const joinSingelRoomToSocket = (singelRoom: roomType, socket: any) => {
-    socket.emit("joinRoom", singelRoom._id, (room: string) => {
-      // console.log("join to room: " + room);
+  const joinSingelRoomToSocket = (singelRoomID: string, socket: any) => {
+    socket.emit("joinRoom", singelRoomID, (room: string) => {
+      // console.log("join to singel: " + singelRoomID);
     });
+  };
+
+  const getAllUserRoom = (id: string, socket: any) => {
+    axios
+      .post("http://localhost:8001/GetAllRooms", {id})
+      .then((res) => {
+        // console.log(res.data.rooms);
+
+        joinAllRoomToSocket(res.data.rooms, socket);
+        joinSingelRoomToSocket(id, socket);
+        setAllUserRooms(res.data.rooms);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  const getAllUserMessages = (id: string) => {
+    axios
+      .post("http://localhost:8001/GetAllUserMessages", {id})
+      .then((res) => {
+        setAllUserMessages(res.data.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
   return {
@@ -138,6 +164,9 @@ const FunctionsContext = (): TypeFunctionsContext => {
     logout,
     joinAllRoomToSocket,
     joinSingelRoomToSocket,
+
+    getAllUserRoom,
+    getAllUserMessages,
   };
 };
 
