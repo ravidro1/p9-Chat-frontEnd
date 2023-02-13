@@ -7,7 +7,8 @@
   z-index: 0;
 
   display: flex;
-  justify-content: flex-end;
+  justify-content: flex-start;
+  align-items: center;
 }
 
 .menuWindow-menu {
@@ -99,4 +100,13 @@
   display: flex;
   align-items: center;
   padding-right: 1.5%;
+}
+
+.areaOfCreateRoom-menu{
+  background-color: transparent;
+  width: 75%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

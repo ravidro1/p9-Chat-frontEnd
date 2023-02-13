@@ -10,7 +10,7 @@ import SizesContextProvider from "./Contexts/SizesContextProvider";
 import DataContextProvider from "./Contexts/DataContextProvider";
 import FunctionsContextProvider from "./Contexts/FunctionsContextProvider";
 
-export const socket = io("http://localhost:8002");
+export const socket = io(`${process.env.REACT_APP_SOCKET_PORT}`);
 
 function App() {
   useEffect(() => {
@@ -22,9 +22,6 @@ function App() {
       socket.off("connection");
     };
   }, []);
-
-
-
 
   return (
     <div className="App">

@@ -57,7 +57,7 @@ const OneContact: React.FC<Props> = ({oneRoom}) => {
     });
 
     axios
-      .post("http://localhost:8001/UpdateUnreadMessage", {
+      .post(`${process.env.REACT_APP_EXPRESS_PORT}/UpdateUnreadMessage`, {
         id: idAndToken?.id,
         roomID: oneRoom?._id,
         newUnreadMessagesNumber: 0,

@@ -10,9 +10,11 @@ import {socket} from "../App";
 import {DataContext} from "../Contexts/DataContextProvider";
 import {FunctionContext} from "../Contexts/FunctionsContextProvider";
 
-interface Props {}
+interface Props {
+  setShowMenu: (state: boolean) => void;
+}
 
-const CreateRoom: React.FC<Props> = () => {
+const CreateRoom: React.FC<Props> = ({setShowMenu}) => {
   const {currentUser, allUserRooms, setAllUserRooms, idAndToken, usersList} =
     useContext(DataContext) as TypeDataContext;
   const {joinSingelRoomToSocket} = useContext(
@@ -34,8 +36,8 @@ const CreateRoom: React.FC<Props> = () => {
   useEffect(() => {
     socket.on("recive-newRoom", (receive: roomType) => {
       console.log(receive);
-      if(receive._id) joinSingelRoomToSocket(receive._id, socket);
-      
+      if (receive._id) joinSingelRoomToSocket(receive._id, socket);
+
       setAllUserRooms((prev: roomType[]): roomType[] => [...prev, receive]);
     });
     return () => {
@@ -63,6 +65,7 @@ const CreateRoom: React.FC<Props> = () => {
           if (newRoom._id) joinSingelRoomToSocket(newRoom._id, socket);
           setNewRoomData({name: "", participants: [idAndToken?.id]});
         }
+        setShowMenu(false);
       }
     );
   };
@@ -91,46 +94,50 @@ const CreateRoom: React.FC<Props> = () => {
   };
 
   return (
-    <div className="main-createRoom">
-      <input
-        value={newRoomData?.name}
-        onChange={(e) =>
-          setNewRoomData({...newRoomData, name: e.target.value.trim()})
-        }
-        placeholder="Room Name"
-      />
-      <input
-        onChange={(e) => setTempNewParticipant(e.target.value.trim())}
-        value={tempNewParticipant}
-        placeholder="Participants"
-        list="users"
-      />
+    <div data-value="child" className="continer-createRoom">
+      <div className="main-createRoom">
+        <input
+          value={newRoomData?.name}
+          onChange={(e) =>
+            setNewRoomData({...newRoomData, name: e.target.value.trim()})
+          }
+          placeholder="Room Name"
+        />
+        <input
+          onChange={(e) => setTempNewParticipant(e.target.value.trim())}
+          value={tempNewParticipant}
+          placeholder="Participants"
+          list="users"
+        />
 
-      {newRoomData?.participants?.map((userID, index) => {
-        const user = usersList?.find((item) => item._id == userID);
-        if (user) {
-          return <span key={index}> {user.username} ,</span>;
-        }
-      })}
-      <button onClick={() => addParticipant(tempNewParticipant)}>
-        {" "}
-        Add Participant{" "}
-      </button>
-      {newRoomData.participants && newRoomData.name && !tempNewParticipant && (
-        <button onClick={createRoom}> Create Room </button>
-      )}
-
-      <datalist id="users">
-        {usersList?.map((user, index) => {
-          if (!newRoomData.participants?.includes(user._id)) {
-            return (
-              <option key={index} value={String(user.username)}>
-                {user.username}
-              </option>
-            );
+        {newRoomData?.participants?.map((userID, index) => {
+          const user = usersList?.find((item) => item._id == userID);
+          if (user) {
+            return <span key={index}> {user.username} ,</span>;
           }
         })}
-      </datalist>
+        <button onClick={() => addParticipant(tempNewParticipant)}>
+          {" "}
+          Add Participant{" "}
+        </button>
+        {newRoomData.participants &&
+          newRoomData.name &&
+          !tempNewParticipant && (
+            <button onClick={createRoom}> Create Room </button>
+          )}
+
+        {/* <datalist id="users">
+          {usersList?.map((user, index) => {
+            if (!newRoomData.participants?.includes(user._id)) {
+              return (
+                <option key={index} value={String(user.username)}>
+                  {user.username}
+                </option>
+              );
+            }
+          })}
+        </datalist> */}
+      </div>
     </div>
   );
 };

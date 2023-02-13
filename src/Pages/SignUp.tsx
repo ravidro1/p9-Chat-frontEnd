@@ -22,14 +22,14 @@ const SignUp: React.FC<Props> = () => {
 
   const signUp = () => {
     axios
-      .post("http://localhost:8001/SignUp", {username, password})
+      .post(`${process.env.REACT_APP_EXPRESS_PORT}/SignUp`, {username, password})
       .then((res) => {
         // console.log(res);
         navigate("/");
       })
       .catch((err) => {
         console.log(err);
-        setErrorLine("Username Or Password incorrect");
+        setErrorLine("Both Input Required");
       });
 
     setUsername("");

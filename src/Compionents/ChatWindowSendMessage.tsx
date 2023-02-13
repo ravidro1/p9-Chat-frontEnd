@@ -20,7 +20,6 @@ const ChatWindowSendMessage: React.FC<{}> = ({}) => {
 
   const sendMessage = () => {
     if (isSuccess) {
-      setTempMessageContent("");
       setIsSuccess(false);
       if (currentUser && currentRoom?._id && tempMessageContent) {
         let newMessage: TypeMessage = {
@@ -37,9 +36,11 @@ const ChatWindowSendMessage: React.FC<{}> = ({}) => {
               _id: id,
               creationTime: currentTime,
             };
+            setTempMessageContent("");
+
             if (allUserMessages)
               setAllUserMessages((prev) => [...prev, newMessageWithID]);
-            setTimeout(() => setIsSuccess(true), 220);
+            setTimeout(() => setIsSuccess(true), 350);
           }
         );
       }

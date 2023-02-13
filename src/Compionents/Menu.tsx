@@ -1,7 +1,8 @@
-import {useContext} from "react";
+import {useContext, useEffect, useState} from "react";
 import {FunctionContext} from "../Contexts/FunctionsContextProvider";
 import "../Style/menu.css";
 import {TypeFunctionsContext} from "../types";
+import CreateRoom from "./CreateRoom";
 import MenuIcon from "./MenuIcon";
 
 interface Props {
@@ -13,19 +14,32 @@ interface Props {
 const NavBarOption: React.FC<Props> = ({showMenu, setShowMenu}) => {
   const {logout} = useContext(FunctionContext) as TypeFunctionsContext;
 
-  // const clickParent = (event: React.MouseEvent) => {
-  //   event.preventDefault();
-  //   let dataValue = (event.target as HTMLElement).getAttribute("data-value");
-  //   if (dataValue !== "child") {
-  //     setShowMenu(!showMenu);
-  //     console.log("parent clicked");
-  //   }
-  // };
+  const [showNewRoomWindow, setShowNewRoomWindow] = useState<boolean | null>(
+    false
+  );
+
+  useEffect(() => {
+    if (!showMenu) setShowNewRoomWindow(false);
+  }, [showMenu]);
+
+  const clickParent = (event: React.MouseEvent) => {
+    event.preventDefault();
+    let dataValue = (event.target as HTMLElement).getAttribute("data-value");
+    if (dataValue == "parent") {
+      console.log("parent clicked");
+      setShowMenu(false);
+      setShowNewRoomWindow(false);
+    } else {
+      console.log("c");
+    }
+  };
 
   return (
     <>
       <div
-        onClick={() => setShowMenu(false)}
+        onClick={(e) => {
+          clickParent(e);
+        }}
         className={
           "main-menu " +
           (showMenu != null
@@ -34,7 +48,12 @@ const NavBarOption: React.FC<Props> = ({showMenu, setShowMenu}) => {
               : "main-menuOut-Animation"
             : "")
         }
-      />
+      >
+        <div data-value="parent" className="areaOfCreateRoom-menu">
+          {showNewRoomWindow && <CreateRoom   setShowMenu={setShowMenu}
+ />}
+        </div>
+      </div>
 
       <div
         className={
@@ -52,7 +71,15 @@ const NavBarOption: React.FC<Props> = ({showMenu, setShowMenu}) => {
           </div>
         </div>
 
-        <div> new room </div>
+        <button
+          onClick={() => {
+            // setShowMenu(false);
+            setShowNewRoomWindow(!showNewRoomWindow);
+          }}
+        >
+          new room
+        </button>
+
         <div> my friends </div>
         <div> settings </div>
         <button className="logoutButton-menu" onClick={logout}>

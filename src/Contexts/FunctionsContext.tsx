@@ -24,7 +24,7 @@ const FunctionsContext = (): TypeFunctionsContext => {
 
   const logout = () => {
     axios
-      .post("http://localhost:8001/Logout", {id: idAndToken?.id})
+      .post(`${process.env.REACT_APP_EXPRESS_PORT}/Logout`, {id: idAndToken?.id})
       .then((res) => {
         setIdAndToken(undefined);
         setCurrentUser(undefined);
@@ -48,7 +48,7 @@ const FunctionsContext = (): TypeFunctionsContext => {
   ): Promise<userType | undefined> => {
     let result;
     try {
-      result = await axios.post("http://localhost:8001/GetOneUser", {id});
+      result = await axios.post(`${process.env.REACT_APP_EXPRESS_PORT}/GetOneUser`, {id});
     } catch (err) {
       console.log(err);
     }
@@ -60,7 +60,7 @@ const FunctionsContext = (): TypeFunctionsContext => {
   const getCurrentUser = (id: string) => {
     if (id.length > 0) {
       axios
-        .post("http://localhost:8001/GetOneUser", {id})
+        .post(`${process.env.REACT_APP_EXPRESS_PORT}/GetOneUser`, {id})
         .then((res) => {
           setCurrentUser(res.data.user);
         })
@@ -84,7 +84,7 @@ const FunctionsContext = (): TypeFunctionsContext => {
     getCurrentUser(currentUserID);
 
     axios
-      .post("http://localhost:8001/GetAllUsers")
+      .post(`${process.env.REACT_APP_EXPRESS_PORT}/GetAllUsers`)
       .then((res) => {
         setUsersList(res.data.users);
       })
@@ -134,7 +134,7 @@ const FunctionsContext = (): TypeFunctionsContext => {
 
   const getAllUserRoom = (id: string, socket: any) => {
     axios
-      .post("http://localhost:8001/GetAllRooms", {id})
+      .post(`${process.env.REACT_APP_EXPRESS_PORT}/GetAllRooms`, {id})
       .then((res) => {
         // console.log(res.data.rooms);
 
@@ -149,7 +149,7 @@ const FunctionsContext = (): TypeFunctionsContext => {
 
   const getAllUserMessages = (id: string) => {
     axios
-      .post("http://localhost:8001/GetAllUserMessages", {id})
+      .post(`${process.env.REACT_APP_EXPRESS_PORT}/GetAllUserMessages`, {id})
       .then((res) => {
         setAllUserMessages(res.data.data);
       })

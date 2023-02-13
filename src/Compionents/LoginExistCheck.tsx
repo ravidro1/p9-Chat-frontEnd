@@ -22,10 +22,13 @@ const LoginExistCheck = () => {
     }
 
     axios
-      .post("http://localhost:8001/LoginVerifyAndCheckIfUserAlreadyLogged", {
-        id,
-        token,
-      })
+      .post(
+        `${process.env.REACT_APP_EXPRESS_PORT}/LoginVerifyAndCheckIfUserAlreadyLogged`,
+        {
+          id,
+          token,
+        }
+      )
       .then((res) => {
         socket.emit("id", id);
 

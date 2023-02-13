@@ -58,7 +58,7 @@ const HomePage: React.FC<Props> = () => {
       } else if (currentRoom?._id == copyOfArray[roomIndex]?._id) {
 
         axios
-          .post("http://localhost:8001/UpdateUnreadMessage", {
+          .post(`${process.env.REACT_APP_EXPRESS_PORT}/UpdateUnreadMessage`, {
             id: idAndToken?.id,
             roomID: currentRoom?._id,
             newUnreadMessagesNumber: 0,
@@ -143,7 +143,6 @@ const HomePage: React.FC<Props> = () => {
         <NavBar />
       </div>
 
-      <CreateRoom />
 
       <div className="lowerSection-homePage">
         <div className="lowerSection-leftSide-homePage">
