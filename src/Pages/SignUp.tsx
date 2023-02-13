@@ -1,6 +1,7 @@
 import axios from "axios";
 import react, {useState, useEffect} from "react";
 import {useNavigate} from "react-router-dom";
+import { socket } from "../App";
 import LoginExistCheck from "../Compionents/LoginExistCheck";
 
 import "../Style/signUp.css";
@@ -25,6 +26,9 @@ const SignUp: React.FC<Props> = () => {
       .post(`${process.env.REACT_APP_EXPRESS_PORT}/SignUp`, {username, password})
       .then((res) => {
         // console.log(res);
+
+        // socket.emit("newUser", )
+
         navigate("/");
       })
       .catch((err) => {
