@@ -8,7 +8,11 @@ import ChatWindowSendMessage from "./ChatWindowSendMessage";
 
 import "../Style/chatWindow.css";
 import {DataContext} from "../Contexts/DataContextProvider";
-import { socket } from "../App";
+import {socket} from "../App";
+
+import {useLottie} from "lottie-react";
+// import robot from "../assets/robot.json";
+import robot from "../assets/113801-robot-green-eyes.json";
 
 interface Props {}
 
@@ -30,7 +34,12 @@ const ChatWindow: React.FC<Props> = ({}) => {
     }
   }, [currentRoom, allUserMessages]);
 
+  const options = {
+    animationData: robot,
+    loop: true,
+  };
 
+  const {View} = useLottie(options);
 
   return (
     <div className="main-chatWindow">
@@ -41,7 +50,14 @@ const ChatWindow: React.FC<Props> = ({}) => {
           <ChatWindowSendMessage />
         </>
       ) : (
-        <>RaviChat</>
+        <>
+          <div className="emptyChat-Window-chatWindow">
+            <div className="robotGif-continer-chatWindow">{View}</div>
+            <div className="emptyChat-text-chatWindow">
+              Select Room Or Create New Room To Start Chat
+            </div>
+          </div>
+        </>
       )}
     </div>
   );

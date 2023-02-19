@@ -121,6 +121,7 @@ const OneContact: React.FC<Props> = ({oneRoom}) => {
           <strong> {oneRoom.name} </strong>
         </div>
 
+
         {Number(oneRoom?.numberOfUnreadMessages) > 0 && (
           <div className="numberOfUnreadMessages-oneContant">
             {oneRoom.numberOfUnreadMessages}

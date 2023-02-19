@@ -2,6 +2,7 @@
   /* display: flex; */
   width: 100vw;
   height: 100vh;
+
   /* overflow: hidden; */
 }
 
@@ -21,10 +22,15 @@
 .lowerSection-leftSide-homePage {
   width: 35%;
   height: 100%;
+
+  min-width: 170px;
+
 }
 
 .lowerSection-rightSide-homePage {
   width: 65%;
   height: 100%;
+
+
 }
 

@@ -28,7 +28,7 @@
 
 .RoomSearchBox-contantSection {
   width: 50%;
-  height: 70%;
+  height: 50%;
   padding-left: 4%;
   font-family: "Secular One", sans-serif;
 
@@ -39,15 +39,12 @@
   border-bottom: 1px solid rgba(0, 0, 0, 0.123);
 
   background-color: transparent;
-  font-size: 1vw;
-
+  font-size: 1.3vw;
 }
 
 .RoomSearchBox-contantSection::placeholder {
-  font-size: 1vw;
+  font-size: 1.3vw;
 }
-
-
 
 .RoomSearchBox-contantSection:focus::placeholder {
   color: rgba(0, 0, 0);
@@ -59,4 +56,24 @@
   overflow: hidden;
   overflow-y: scroll;
   direction: rtl;
+}
+
+
+
+@media only screen and (max-width: 768px) {
+  .RoomSearchBox-contantSection::placeholder {
+    font-size: 2vw;
+  }
+
+  .RoomSearchBox-contantSection {
+    width: 55%;
+    height: 40%;
+    padding-left: 4%;
+    font-size: 2vw;
+  }
+
+  .recentWord-contantSection {
+    font-weight: 700;
+    font-size: 3vw;
+  }
 }

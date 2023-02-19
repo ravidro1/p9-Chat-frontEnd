@@ -15,11 +15,13 @@ const NavBarOption: React.FC<Props> = ({showMenu, setShowMenu}) => {
   const {logout} = useContext(FunctionContext) as TypeFunctionsContext;
 
   const [showNewRoomWindow, setShowNewRoomWindow] = useState<boolean | null>(
-    false
+    null
   );
 
   useEffect(() => {
-    if (!showMenu) setShowNewRoomWindow(false);
+    if (!showMenu && showNewRoomWindow) {
+      setShowNewRoomWindow(false);
+    }
   }, [showMenu]);
 
   const clickParent = (event: React.MouseEvent) => {
@@ -28,7 +30,7 @@ const NavBarOption: React.FC<Props> = ({showMenu, setShowMenu}) => {
     if (dataValue == "parent") {
       console.log("parent clicked");
       setShowMenu(false);
-      setShowNewRoomWindow(false);
+      // setShowNewRoomWindow(null);
     } else {
       console.log("c");
     }
@@ -51,10 +53,17 @@ const NavBarOption: React.FC<Props> = ({showMenu, setShowMenu}) => {
       >
         <div data-value="parent" className="areaOfCreateRoom-menu">
           {/* {showNewRoomWindow && ( */}
-            <CreateRoom
-              animationClass={showNewRoomWindow ? "slide-fwd-center" : "slide-bck-center"}
-              setShowMenu={setShowMenu}
-            />
+          <CreateRoom
+            animationClass={
+              showNewRoomWindow != null
+                ? showNewRoomWindow
+                  ? "slide-fwd-center"
+                  : "slide-bck-center"
+                : ""
+            }
+            showMenu={showMenu}
+            setShowMenu={setShowMenu}
+          />
           {/* )} */}
         </div>
       </div>
@@ -89,6 +98,7 @@ const NavBarOption: React.FC<Props> = ({showMenu, setShowMenu}) => {
         <button className="logoutButton-menu" onClick={logout}>
           Logout
         </button>
+        <>{console.log(showNewRoomWindow)}</>
       </div>
     </>
   );

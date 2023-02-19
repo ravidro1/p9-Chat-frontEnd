@@ -52,6 +52,7 @@ const SignUp: React.FC<Props> = () => {
         <div className="signUpWord-signUpPage"> Register </div>
         <div className="inputs-signUpPage">
           <input
+            maxLength={15}
             className="input-signUpPage"
             placeholder="Username"
             onChange={(e) => {

@@ -4,8 +4,8 @@
   border-left: 1px solid rgba(0, 0, 0, 0.199);
 
   width: 100%;
-  min-height: 13%;
-  max-height: 13%;
+  min-height: 14%;
+  max-height: 14%;
 
   color: black;
 
@@ -36,23 +36,28 @@
 }
 
 .roomName-oneContant {
-  font-size: 120%;
+  font-size: 1.4vw;
   font-weight: 400;
 }
 
 .numberOfUnreadMessages-oneContant {
-  font-size: 80%;
+  /* font-size: 70%; */
+  font-size: 1vw;
+  font-weight: 600;
+
   background-color: rgba(128, 128, 128, 0.205);
   border-radius: 50%;
   aspect-ratio: 1/1;
-  padding-inline: 6%;
+  padding-inline: 2%;
   display: flex;
   align-items: center;
   justify-content: center;
+  /* width: 1%; */
 }
 
 .lastMessage-oneContant {
-  font-size: 85%;
+  /* font-size: 85%; */
+  font-size: 0.9vw;
   font-weight: 200;
   color: rgb(0, 0, 0);
 
@@ -64,7 +69,8 @@
 
 .lastMessage-creationTime-oneContant {
   width: 100%;
-  font-size: 70%;
+  /* font-size: 70%; */
+  font-size: 0.75vw;
   text-align: end;
 }
 
@@ -76,7 +82,8 @@
 }
 
 .typing-oneContant {
-  font-size: 100%;
+  /* font-size: 100%; */
+  font-size: 1.05vw;
   padding-bottom: 5%;
 
   color: green;
@@ -84,6 +91,42 @@
   /* background-clip: text;
   color: transparent; */
   /* animation: gradient-text 0.5s infinite; */
+}
+
+@media only screen and (max-width: 768px) {
+  .roomName-oneContant {
+    font-size: 3.5vw;
+    font-weight: 400;
+  }
+
+  .numberOfUnreadMessages-oneContant {
+    font-size: 2vw;
+    border-radius: 50%;
+    aspect-ratio: 1/1;
+    padding: 2%;
+  }
+
+  .lastMessage-oneContant {
+    font-size: 2.5vw;
+    font-weight: 200;
+
+
+    word-break: keep-all;
+    white-space: nowrap;
+  }
+
+  .lastMessage-creationTime-oneContant {
+    width: 100%;
+    font-size: 1.8vw;
+    text-align: end;
+  }
+
+  .typing-oneContant {
+    font-size: 1.05vw;
+    padding-bottom: 5%;
+
+
+  }
 }
 
 /* font-size: clamp(10px, 2.5vw, 30px); */
