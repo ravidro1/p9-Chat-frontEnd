@@ -181,7 +181,7 @@ const CreateRoom: React.FC<Props> = ({
                         ),
                       });
                     }}
-                    className="oneParticipant-block-createRoom"
+                    className="oneParticipant-block-createRoom hover-this-block-class"
                     key={index}
                   >
                     {" "}

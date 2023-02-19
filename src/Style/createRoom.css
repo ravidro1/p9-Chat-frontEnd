@@ -77,10 +77,6 @@
   align-items: center;
 }
 
-.oneParticipant-block-createRoom:hover {
-  background-color: #044a5e;
-}
-
 .addParticipantAndCreateRoom-button-createRoom {
   border: 1px solid black;
   border-radius: 0.5vw;
@@ -129,4 +125,8 @@
 .inputs-createRoom:focus::placeholder {
   font-weight: 600;
   color: black;
+}
+
+.hover-this-block-class:hover {
+  background-color: #044a5e;
 }

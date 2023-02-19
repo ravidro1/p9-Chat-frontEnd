@@ -40,7 +40,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 85%;
+  font-size: 1.2vw;
 }
 
 .form-loginPage {
@@ -65,21 +65,64 @@
 .input-loginPage {
   height: 32%;
   padding-left: 1vw;
+
+  padding-top: 0.3vw;
+}
+
+.input-loginPage::placeholder {
+  font-size: 1.15vw;
 }
 
 .errorLine-LoginPage {
   color: red;
   height: 7%;
-  /* border: #3a9efd 0.2vw solid; */
-  font-size: 70%;
+  font-size: 1vw;
 }
 
 .toRegister-LoginPage {
   color: cornflowerblue;
-  font-size: 75%;
+  font-size: 1.8vw;
 }
 
 .toRegister-LoginPage:hover {
   color: purple;
   cursor: pointer;
+}
+
+@media only screen and (max-width: 830px) {
+  .loginWord-LoginPage {
+    font-size: 5vw;
+  }
+
+  .logo-loginPage img {
+    width: 85%;
+  }
+
+  .loginButton-loginPage {
+    width: 35%;
+    height: 8%;
+
+    font-size: 3vw;
+  }
+
+  .form-loginPage {
+    width: 60%;
+  }
+
+  .input-loginPage {
+    height: 32%;
+    padding-left: 2vw;
+  }
+
+  .input-loginPage::placeholder {
+    font-size: 3vw;
+  }
+
+  .errorLine-LoginPage {
+    font-size: 2vw;
+  }
+
+  .toRegister-LoginPage {
+    font-size: 3.5vw;
+  }
 }

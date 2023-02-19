@@ -28,7 +28,7 @@
 .MessageWriter-oneMessage {
   width: 100%;
   height: 15%;
-  font-size: 100%;
+  font-size: 1.3vw;
 
   color: rgb(35, 197, 48);
   display: flex;
@@ -37,7 +37,7 @@
 }
 
 .MessageContent-oneMessage {
-  font-size: 85%;
+  font-size: 1.2vw;
 
   width: 100%;
   height: 75%;
@@ -50,7 +50,37 @@
 
 .Time-oneMessage {
   color: rgba(0, 0, 0, 0.6);
-  font-size: 65%;
+  font-size: 0.8vw;
   text-align: start;
   padding-block: 1.5%;
+}
+
+@media only screen and (max-width: 830px) {
+  .messagePlusTime-oneMessage {
+    width: auto;
+    display: flex;
+    flex-direction: column;
+    max-width: 45%;
+    margin: 0.6%;
+  }
+
+  .MessageWriter-oneMessage {
+    width: 100%;
+    height: 15%;
+    font-size: 3vw;
+
+    padding-bottom: 5%;
+  }
+
+  .MessageContent-oneMessage {
+    font-size: 2.5vw;
+
+    width: 100%;
+    height: 75%;
+  }
+
+  .Time-oneMessage {
+    font-size: 2vw;
+    padding-block: 1.5%;
+  }
 }

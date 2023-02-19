@@ -53,9 +53,20 @@ const ContactWindow: React.FC<Props> = () => {
           return <OneContact key={index} oneRoom={oneRoom} />;
         })}
 
-        {searchRoomList != undefined && searchRoomList?.length < 1 && (
-          <> !room </>
-        )}
+        {searchRoomList != undefined &&
+          allUserRooms &&
+          searchRoomList?.length < 1 &&
+          (allUserRooms?.length > 0 ? (
+            <div className="NoMatchingRoomsWereFound">
+              {" "}
+              No Matching Rooms Were Found{" "}
+            </div>
+          ) : (
+            <div className="NoMatchingRoomsWereFound">
+              {" "}
+              Your Room List Empty{" "}
+            </div>
+          ))}
       </div>
     </div>
   );

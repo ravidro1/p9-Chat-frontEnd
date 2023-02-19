@@ -25,16 +25,15 @@
   font-size: 2.5vw;
 }
 
-@media only screen and (max-width: 768px) {
+@media only screen and (max-width: 830px) {
   .emptyChat-text-chatWindow {
     font-size: 4.5vw;
     /* word-break: break-all; */
     white-space: wrap;
   }
 
-
-    .robotGif-continer-chatWindow {
-      width: 65%;
-      height: 65%;
-    }
+  .robotGif-continer-chatWindow {
+    width: 65%;
+    height: 65%;
+  }
 }

@@ -1,17 +1,16 @@
 .main-MenuIcon {
-    aspect-ratio: 1/1;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    
-    margin-right: 1.5%;
+  aspect-ratio: 1/1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  margin-right: 1.5%;
 }
 
 .stripes-MenuIcon {
   width: 100%;
   height: 25%;
   background-color: #c4c4c4;
-    border-radius: 15%;
+  border-radius: 15%;
   border: 1px solid black;
 }
-
