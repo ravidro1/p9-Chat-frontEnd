@@ -88,13 +88,11 @@
   }
 }
 
-.rotete{
+.rotete {
   transform: rotate(90deg);
-
 }
 
-
-.menuIconContiner-menu{
+.menuIconContiner-menu {
   position: absolute;
   height: 100%;
   display: flex;
@@ -102,7 +100,7 @@
   padding-right: 1.5%;
 }
 
-.areaOfCreateRoom-menu{
+.areaOfCreateRoom-menu {
   background-color: transparent;
   width: 75%;
   height: 100%;
@@ -110,3 +108,4 @@
   justify-content: center;
   align-items: center;
 }
+

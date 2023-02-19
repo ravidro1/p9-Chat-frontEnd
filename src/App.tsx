@@ -9,6 +9,7 @@ import {useEffect} from "react";
 import SizesContextProvider from "./Contexts/SizesContextProvider";
 import DataContextProvider from "./Contexts/DataContextProvider";
 import FunctionsContextProvider from "./Contexts/FunctionsContextProvider";
+import SocketHandler from "./Compionents/SocketHandler";
 
 export const socket = io(`${process.env.REACT_APP_SOCKET_PORT}`);
 

@@ -1,7 +1,7 @@
 import axios from "axios";
 import react, {useState, useEffect} from "react";
 import {useNavigate} from "react-router-dom";
-import { socket } from "../App";
+import {socket} from "../App";
 import LoginExistCheck from "../Compionents/LoginExistCheck";
 
 import "../Style/signUp.css";
@@ -22,19 +22,25 @@ const SignUp: React.FC<Props> = () => {
   }, []);
 
   const signUp = () => {
-    axios
-      .post(`${process.env.REACT_APP_EXPRESS_PORT}/SignUp`, {username, password})
-      .then((res) => {
-        // console.log(res);
+    // axios
+    //   .post(`${process.env.REACT_APP_EXPRESS_PORT}/SignUp`, {username, password})
+    //   .then((res) => {
+    //     // console.log(res);
 
-        // socket.emit("newUser", )
+    //     // socket.emicdt("newUser", )
 
-        navigate("/");
-      })
-      .catch((err) => {
-        console.log(err);
-        setErrorLine("Both Input Required");
-      });
+    //     navigate("/");
+    //   })
+    //   .catch((err) => {
+    //     console.log(err);
+    //     setErrorLine("Both Input Required");
+    //   });
+
+    socket.emit("signup", username, password, () => {
+      console.log("signup ", username, password);
+
+      navigate("/");
+    });
 
     setUsername("");
     setPassword("");

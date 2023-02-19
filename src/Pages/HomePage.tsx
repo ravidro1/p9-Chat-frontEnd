@@ -20,6 +20,7 @@ const HomePage: React.FC<Props> = () => {
     currentRoom,
     setAllUserMessages,
     setTypingQueue,
+    setUsersList,
   } = useContext(DataContext) as TypeDataContext;
 
   const {getAllUserRoom, getAllUserMessages} = useContext(
@@ -56,7 +57,6 @@ const HomePage: React.FC<Props> = () => {
             : 1,
         };
       } else if (currentRoom?._id == copyOfArray[roomIndex]?._id) {
-
         axios
           .post(`${process.env.REACT_APP_EXPRESS_PORT}/UpdateUnreadMessage`, {
             id: idAndToken?.id,
@@ -81,8 +81,13 @@ const HomePage: React.FC<Props> = () => {
       setMessageRecive(recive);
     });
 
+    socket.on("receive-signup", (user) => {
+      setUsersList((prev) => [...prev, user]);
+    });
+
     return () => {
       socket.off("recive-message");
+      socket.off("receive-signup");
     };
   }, []);
 
@@ -142,7 +147,6 @@ const HomePage: React.FC<Props> = () => {
       <div className="upperSection-homePage">
         <NavBar />
       </div>
-
 
       <div className="lowerSection-homePage">
         <div className="lowerSection-leftSide-homePage">

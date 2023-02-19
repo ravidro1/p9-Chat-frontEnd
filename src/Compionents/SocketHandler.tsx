@@ -1,12 +1,10 @@
-import react from 'react'
+import react, {useEffect} from "react";
+import {socket} from "../App";
 
-interface Props{
-
-}
-
+interface Props {}
 
 const SocketHandler: React.FC<Props> = () => {
-    return (<div> Hello </div>);
-}
+  return <></>;
+};
 
 export default SocketHandler;

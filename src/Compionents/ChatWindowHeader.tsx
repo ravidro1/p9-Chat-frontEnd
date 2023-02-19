@@ -27,12 +27,10 @@ const ChatWindowHeader: React.FC<Props> = () => {
     <div className="main-ChatWindowHeader">
       <div className="leftSide-ChatWindowHeader">
         <div className="nameOfRoom-ChatWindowHeader">
-          {" "}
-          {"Name Of Room: "} <strong> {currentRoom?.name} </strong>{" "}
+          {"Name Of Room: "} <strong> {currentRoom?.name} </strong>
         </div>
         <div className="numberOfMembers-ChatWindowHeader">
-          {" "}
-          {"Members: "} <strong> {currentRoom?.participants?.length} </strong>{" "}
+          {"Members: "} <strong> {currentRoom?.participants?.length} </strong>
         </div>
       </div>
 

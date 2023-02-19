@@ -12,9 +12,10 @@ import {FunctionContext} from "../Contexts/FunctionsContextProvider";
 
 interface Props {
   setShowMenu: (state: boolean) => void;
+  animationClass: string;
 }
 
-const CreateRoom: React.FC<Props> = ({setShowMenu}) => {
+const CreateRoom: React.FC<Props> = ({setShowMenu, animationClass}) => {
   const {currentUser, allUserRooms, setAllUserRooms, idAndToken, usersList} =
     useContext(DataContext) as TypeDataContext;
   const {joinSingelRoomToSocket} = useContext(
@@ -94,7 +95,7 @@ const CreateRoom: React.FC<Props> = ({setShowMenu}) => {
   };
 
   return (
-    <div data-value="child" className="continer-createRoom">
+    <div data-value="child" className={"continer-createRoom " + animationClass}>
       <div className="main-createRoom">
         <input
           value={newRoomData?.name}
@@ -126,7 +127,7 @@ const CreateRoom: React.FC<Props> = ({setShowMenu}) => {
             <button onClick={createRoom}> Create Room </button>
           )}
 
-        {/* <datalist id="users">
+        <datalist id="users">
           {usersList?.map((user, index) => {
             if (!newRoomData.participants?.includes(user._id)) {
               return (
@@ -136,7 +137,7 @@ const CreateRoom: React.FC<Props> = ({setShowMenu}) => {
               );
             }
           })}
-        </datalist> */}
+        </datalist>
       </div>
     </div>
   );

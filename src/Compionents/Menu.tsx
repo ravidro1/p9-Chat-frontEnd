@@ -50,8 +50,12 @@ const NavBarOption: React.FC<Props> = ({showMenu, setShowMenu}) => {
         }
       >
         <div data-value="parent" className="areaOfCreateRoom-menu">
-          {showNewRoomWindow && <CreateRoom   setShowMenu={setShowMenu}
- />}
+          {/* {showNewRoomWindow && ( */}
+            <CreateRoom
+              animationClass={showNewRoomWindow ? "slide-fwd-center" : "slide-bck-center"}
+              setShowMenu={setShowMenu}
+            />
+          {/* )} */}
         </div>
       </div>
 
