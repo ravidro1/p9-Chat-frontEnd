@@ -34,17 +34,18 @@ const CreateRoom: React.FC<Props> = ({setShowMenu, animationClass}) => {
       setNewRoomData({name: "", participants: [idAndToken?.id]});
   }, [idAndToken?.id]);
 
-  useEffect(() => {
-    socket.on("recive-newRoom", (receive: roomType) => {
-      console.log(receive);
-      if (receive._id) joinSingelRoomToSocket(receive._id, socket);
+  // useEffect(() => {
+  //   socket.on("recive-newRoom", (receive: roomType) => {
+  //     console.log(receive);
+  //     if (receive._id) joinSingelRoomToSocket(receive._id, socket);
+  //     console.log("dsaassa");
 
-      setAllUserRooms((prev: roomType[]): roomType[] => [...prev, receive]);
-    });
-    return () => {
-      socket.off("recive-newRoom");
-    };
-  }, []);
+  //     setAllUserRooms((prev: roomType[]): roomType[] => [...prev, receive]);
+  //   });
+  //   return () => {
+  //     socket.off("recive-newRoom");
+  //   };
+  // }, []);
 
   const createRoom = () => {
     const tempCreatorAndTime = {

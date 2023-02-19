@@ -7,8 +7,9 @@ import {DataContext} from "../Contexts/DataContextProvider";
 interface Props {}
 
 const ContactWindow: React.FC<Props> = () => {
-  const {allUserRooms, currentRoom, setCurrentRoom} =
-    useContext(DataContext) as TypeDataContext;
+  const {allUserRooms, currentRoom, setCurrentRoom} = useContext(
+    DataContext
+  ) as TypeDataContext;
 
   const [searchRoomList, setSearchRoomList] = useState<
     roomType[] | undefined
@@ -16,6 +17,7 @@ const ContactWindow: React.FC<Props> = () => {
 
   useEffect(() => {
     setSearchRoomList(allUserRooms);
+    console.log(allUserRooms);
 
     if (currentRoom) {
       setCurrentRoom(

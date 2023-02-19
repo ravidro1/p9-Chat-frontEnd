@@ -3,7 +3,12 @@ import react, {useContext, useEffect, useState} from "react";
 import ChatWindow from "../Compionents/ChatWindow";
 import ContactWindow from "../Compionents/ContactSection";
 import CreateRoom from "../Compionents/CreateRoom";
-import {TypeDataContext, TypeFunctionsContext, TypeMessage} from "../types";
+import {
+  roomType,
+  TypeDataContext,
+  TypeFunctionsContext,
+  TypeMessage,
+} from "../types";
 import "../Style/homePage.css";
 import NavBar from "../Compionents/NavBar";
 import LoginExistCheck from "../Compionents/LoginExistCheck";
@@ -23,9 +28,8 @@ const HomePage: React.FC<Props> = () => {
     setUsersList,
   } = useContext(DataContext) as TypeDataContext;
 
-  const {getAllUserRoom, getAllUserMessages} = useContext(
-    FunctionContext
-  ) as TypeFunctionsContext;
+  const {getAllUserRoom, joinSingelRoomToSocket, getAllUserMessages} =
+    useContext(FunctionContext) as TypeFunctionsContext;
 
   const {checkIfLogin} = LoginExistCheck();
 
@@ -88,6 +92,19 @@ const HomePage: React.FC<Props> = () => {
     return () => {
       socket.off("recive-message");
       socket.off("receive-signup");
+    };
+  }, []);
+
+  useEffect(() => {
+    socket.on("recive-newRoom", (receive: roomType) => {
+      console.log(receive);
+      if (receive._id) joinSingelRoomToSocket(receive._id, socket);
+      console.log("dsaassa");
+
+      setAllUserRooms((prev: roomType[]): roomType[] => [...prev, receive]);
+    });
+    return () => {
+      socket.off("recive-newRoom");
     };
   }, []);
 
