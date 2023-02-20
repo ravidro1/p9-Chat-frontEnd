@@ -65,6 +65,12 @@
   padding-left: 1vw;
 
   padding-top: 0.3vw;
+
+  font-size: 1.15vw;
+}
+
+.input-signUpPage::placeholder {
+  font-size: 1.15vw;
 }
 
 .errorLine-signUpPage {
@@ -102,6 +108,8 @@
   .input-signUpPage {
     height: 32%;
     padding-left: 2vw;
+
+    font-size: 3vw;
   }
 
   .input-signUpPage::placeholder {

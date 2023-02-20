@@ -1,0 +1,49 @@
+.main-menu_Phone {
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 0;
+
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.menuWindow-menu_Phone {
+  width: 35%;
+  height: 100%;
+  background-color: whitesmoke;
+  position: fixed;
+  right: -35%;
+  top: 0;
+  z-index: 2;
+  border-left: 1px solid black;
+}
+
+.restOfTheAreaMenu-menu_Phone {
+  width: 65%;
+  height: 100%;
+  background-color: transparent;
+}
+
+.menuIconContiner-menu_Phone {
+  position: absolute;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  padding-right: 1.5%;
+}
+
+.areaOfCreateRoom-menu_Phone {
+  background-color: transparent;
+  width: 65%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.logoutButton-menu_Phone {
+}

@@ -67,6 +67,9 @@
   padding-left: 1vw;
 
   padding-top: 0.3vw;
+
+  font-size: 1.15vw;
+
 }
 
 .input-loginPage::placeholder {
@@ -112,6 +115,9 @@
   .input-loginPage {
     height: 32%;
     padding-left: 2vw;
+
+    font-size: 3vw;
+
   }
 
   .input-loginPage::placeholder {

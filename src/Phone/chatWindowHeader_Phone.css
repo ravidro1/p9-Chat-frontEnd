@@ -1,0 +1,58 @@
+.main-ChatWindowHeader_Phone {
+  width: 100%;
+  height: 10%;
+  background-color: #05728f;
+
+  display: flex;
+  justify-content: space-between;
+
+  font-size: 3.5vw;
+
+  color: whitesmoke;
+
+  font-family: "Roboto Condensed", sans-serif;
+}
+
+.leftSide-ChatWindowHeader_Phone {
+  display: flex;
+  justify-content: space-around;
+  align-items: flex-start;
+  flex-direction: column;
+
+  white-space: nowrap;
+
+  width: auto;
+  margin-left: 4%;
+}
+
+.rightSide-ChatWindowHeader_Phone {
+  height: 100%;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin-right: 4%;
+  color: green;
+
+  font-size: 2.5vw;
+}
+
+.backArrow-ChatWindowHeader_Phone {
+  width: 15%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-size: 2vw;
+}
+
+.backArrow-ChatWindowHeader_Phone:hover {
+  background-color: #03313d;
+}
+
+.headLineAndTyping-ChatWindowHeader_Phone {
+  width: 85%;
+  display: flex;
+  align-items: center;
+}

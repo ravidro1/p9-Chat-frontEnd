@@ -8,7 +8,8 @@
 }
 
 .logo-NavBar {
-  width: 15%;
+  /* width: 11vw; */
+  height: 110px;
 }
 
 .menu-NavBar {
@@ -21,11 +22,17 @@
   z-index: 3;
 }
 
-.menuIconContiner-navBar{
-    height: 100%;
-    display: flex;
-    align-items: center;
-    padding-right: 1.5%;
+.menuIconContiner-navBar {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  padding-right: 1.5%;
+}
+
+@media only screen and (max-width: 830px) {
+  .logo-NavBar {
+    height: 90px;
+  }
 }
 
 /* 

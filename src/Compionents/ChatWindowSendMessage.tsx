@@ -1,4 +1,4 @@
-import {useContext, useState, useEffect} from "react";
+import {useContext, useRef, useState, useEffect} from "react";
 import {socket} from "../App";
 import {TypeDataContext, TypeMessage, userType} from "../types";
 
@@ -18,9 +18,13 @@ const ChatWindowSendMessage: React.FC<{}> = ({}) => {
 
   const [isSuccess, setIsSuccess] = useState(true);
 
+  const [canTyping, setCanTyping] = useState(true);
+
   const sendMessage = () => {
     if (isSuccess) {
       setIsSuccess(false);
+      setCanTyping(false);
+
       if (currentUser && currentRoom?._id && tempMessageContent) {
         let newMessage: TypeMessage = {
           from: currentUser.username,
@@ -40,7 +44,10 @@ const ChatWindowSendMessage: React.FC<{}> = ({}) => {
 
             if (allUserMessages)
               setAllUserMessages((prev) => [...prev, newMessageWithID]);
-            setTimeout(() => setIsSuccess(true), 350);
+            setTimeout(() => {
+              setIsSuccess(true);
+              setCanTyping(true);
+            }, 350);
           }
         );
       }
@@ -72,6 +79,8 @@ const ChatWindowSendMessage: React.FC<{}> = ({}) => {
     setTempMessageContent("");
   }, [currentRoom]);
 
+  useEffect(() => {}, [canTyping]);
+
   return (
     <form
       onSubmit={(e) => {
@@ -80,10 +89,15 @@ const ChatWindowSendMessage: React.FC<{}> = ({}) => {
       className="main-chatWindowSendMessage"
     >
       <input
+        disabled={canTyping ? false : true}
         className="input-chatWindowSendMessage"
         placeholder="Send..."
         value={tempMessageContent}
-        onChange={(e) => setTempMessageContent(e.target.value)}
+        onChange={(e) => {
+          // if (canTyping) {
+          setTempMessageContent(e.target.value);
+          // }
+        }}
         type="text"
       />
 

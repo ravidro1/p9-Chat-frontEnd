@@ -1,0 +1,163 @@
+.main-oneContant {
+  background-color: whitesmoke;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.199);
+  border-left: 1px solid rgba(0, 0, 0, 0.199);
+
+  width: 100%;
+  min-height: 14%;
+  max-height: 14%;
+
+  color: black;
+
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-between;
+  /* font-family: "Secular One", sans-serif; */
+  font-family: sans-serif;
+  direction: ltr;
+
+  overflow: hidden;
+
+  padding-left: 3%;
+  padding-right: 3%;
+  padding-top: 2%;
+  padding-bottom: 3%;
+}
+
+.main-oneContant:hover {
+  background-color: rgba(128, 128, 128, 0.205);
+}
+.Continer-roomName-oneContant {
+  display: flex;
+  justify-content: space-between;
+  padding-bottom: 0.3vw;
+  width: 100%;
+}
+
+.roomName-oneContant {
+  font-size: 1.4vw;
+  font-weight: 400;
+}
+
+.numberOfUnreadMessages-oneContant {
+  /* font-size: 70%; */
+  font-size: 1vw;
+  font-weight: 600;
+
+  background-color: rgba(128, 128, 128, 0.205);
+  border-radius: 50%;
+  aspect-ratio: 1.3/1;
+  padding-inline: 0.5vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* width: 1%; */
+}
+
+.lastMessage-oneContant {
+  /* font-size: 85%; */
+  font-size: 0.9vw;
+  font-weight: 200;
+  color: rgb(0, 0, 0);
+
+  /* padding-top: 0.5vw; */
+
+  word-break: keep-all;
+  white-space: nowrap;
+}
+
+.lastMessage-creationTime-oneContant {
+  width: 100%;
+  /* font-size: 70%; */
+  font-size: 0.75vw;
+  text-align: end;
+}
+
+.roomCreationTime-oneContant {
+  width: 100%;
+  font-size: 85%;
+  text-align: start;
+  height: max-content;
+}
+
+.typing-oneContant {
+  /* font-size: 100%; */
+  font-size: 1.05vw;
+  padding-bottom: 5%;
+
+  color: green;
+
+  /* background-clip: text;
+  color: transparent; */
+  /* animation: gradient-text 0.5s infinite; */
+}
+
+@media only screen and (max-width: 830px) {
+  .roomName-oneContant {
+    font-size: 3.5vw;
+    font-weight: 400;
+  }
+
+  .numberOfUnreadMessages-oneContant {
+    font-size: 2vw;
+    border-radius: 50%;
+    padding: 0.7vw;
+  }
+
+  .lastMessage-oneContant {
+    font-size: 2.5vw;
+    font-weight: 200;
+
+    word-break: keep-all;
+    white-space: nowrap;
+  }
+
+  .lastMessage-creationTime-oneContant {
+    width: 100%;
+    font-size: 1.8vw;
+    text-align: end;
+  }
+
+  .typing-oneContant {
+    font-size: 2.2vw;
+    padding-bottom: 5%;
+  }
+}
+
+/* font-size: clamp(10px, 2.5vw, 30px); */
+
+/* @keyframes gradient-text {
+  0% {
+    background-image: linear-gradient(
+      to right,
+      rgb(35, 240, 68),
+      rgb(22, 133, 21),
+      rgb(44, 4, 4)
+    );
+  }
+  33% {
+    background-image: linear-gradient(
+      to right,
+      rgb(44, 4, 4)
+      rgb(35, 240, 68),
+      rgb(22, 133, 21),
+    );
+  }
+  66% {
+    background-image: linear-gradient(
+      to right,
+      rgb(22, 133, 21),
+      rgb(44, 4, 4)
+      rgb(35, 240, 68),
+    );
+  }
+  100% {
+    background-image: linear-gradient(
+      to right,
+      rgb(35, 240, 68),
+      rgb(22, 133, 21),
+      rgb(44, 4, 4)
+    );
+  }
+} */

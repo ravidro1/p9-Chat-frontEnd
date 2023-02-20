@@ -3,8 +3,9 @@ import Login from "./Pages/Login";
 import SignUp from "./Pages/SignUp";
 import {Routes, Route} from "react-router-dom";
 import HomePage from "./Pages/HomePage";
+import HomePagePhone from "./Phone/HomePage_Phone";
 import {io} from "socket.io-client";
-import {useEffect} from "react";
+import {useEffect, useState, useRef} from "react";
 
 import SizesContextProvider from "./Contexts/SizesContextProvider";
 import DataContextProvider from "./Contexts/DataContextProvider";
@@ -24,6 +25,20 @@ function App() {
     };
   }, []);
 
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+
+  useEffect(() => {
+    const handleWindowResize = () => {
+      setWindowWidth(window.innerWidth);
+    };
+
+    window.addEventListener("resize", handleWindowResize);
+
+    return () => {
+      window.removeEventListener("resize", handleWindowResize);
+    };
+  });
+
   return (
     <div className="App">
       <DataContextProvider>
@@ -32,7 +47,11 @@ function App() {
             <Routes>
               <Route path="/" element={<Login />} />
               <Route path="/SignUp" element={<SignUp />} />
-              <Route path="/Home" element={<HomePage />} />
+              {windowWidth > 768 ? (
+                <Route path="/Home" element={<HomePage />} />
+              ) : (
+                <Route path="/Home" element={<HomePagePhone />} />
+              )}{" "}
             </Routes>
           </FunctionsContextProvider>
         </SizesContextProvider>

@@ -5,10 +5,11 @@ import {
   TypeFunctionsContext,
   userType,
 } from "../types";
-import "../Style/createRoom.css";
 import {socket} from "../App";
 import {DataContext} from "../Contexts/DataContextProvider";
 import {FunctionContext} from "../Contexts/FunctionsContextProvider";
+
+import "./createRoom_Phone.css";
 
 interface Props {
   showMenu: boolean | null;
@@ -16,7 +17,7 @@ interface Props {
   animationClass: string;
 }
 
-const CreateRoom: React.FC<Props> = ({
+const CreateRoom_Phone: React.FC<Props> = ({
   setShowMenu,
   animationClass,
   showMenu,
@@ -36,8 +37,12 @@ const CreateRoom: React.FC<Props> = ({
 
   useEffect(() => {
     if (!showMenu) {
+      // console.log("osda1");
+
       setTempNewParticipant("");
       if (currentUser?.username) {
+        // console.log("osda12");
+
         setNewRoomData({name: "", participants: [currentUser?._id]});
       }
     }
@@ -110,13 +115,13 @@ const CreateRoom: React.FC<Props> = ({
   };
 
   return (
-    <div data-value="child" className={"continer-createRoom " + animationClass}>
+    <div data-value="child" className={"continer-createRoom_Phone " + animationClass}>
       {/* <div className="main-createRoom"> */}
 
-      <div className="inputs-area-createRoom">
-        <div className="inputAndButton-block-createRoom">
+      <div className="inputs-area-createRoom_Phone">
+        <div className="inputAndButton-block-createRoom_Phone">
           <input
-            className="inputs-createRoom"
+            className="inputs-createRoom_Phone"
             onChange={(e) => setTempNewParticipant(e.target.value.trim())}
             value={tempNewParticipant}
             placeholder="Participants"
@@ -124,16 +129,16 @@ const CreateRoom: React.FC<Props> = ({
           />
 
           <div
-            className="addParticipantAndCreateRoom-button-createRoom"
+            className="addParticipantAndCreateRoom-button-createRoom_Phone"
             onClick={() => addParticipant(tempNewParticipant)}
           >
             Add Participant
           </div>
         </div>
 
-        <div className="inputAndButton-block-createRoom">
+        <div className="inputAndButton-block-createRoom_Phone">
           <input
-            className="inputs-createRoom"
+            className="inputs-createRoom_Phone"
             value={newRoomData?.name}
             onChange={(e) =>
               setNewRoomData({...newRoomData, name: e.target.value.trim()})
@@ -144,7 +149,7 @@ const CreateRoom: React.FC<Props> = ({
             newRoomData.name &&
             !tempNewParticipant && (
               <div
-                className="addParticipantAndCreateRoom-button-createRoom"
+                className="addParticipantAndCreateRoom-button-createRoom_Phone"
                 onClick={createRoom}
               >
                 {" "}
@@ -154,14 +159,14 @@ const CreateRoom: React.FC<Props> = ({
         </div>
       </div>
 
-      <div className="Participants-window-continer-createRoom">
-        <div className="Participants-window-createRoom">
+      <div className="Participants-window-continer-createRoom_Phone">
+        <div className="Participants-window-_Phone">
           {newRoomData?.participants?.map((userID, index) => {
             const user = usersList?.find((item) => item._id == userID);
             if (user) {
               if (userID == currentUser?._id) {
                 return (
-                  <div className="oneParticipant-block-createRoom" key={index}>
+                  <div className="oneParticipant-block-createRoom_Phone" key={index}>
                     {" "}
                     {user.username}
                   </div>
@@ -177,7 +182,7 @@ const CreateRoom: React.FC<Props> = ({
                         ),
                       });
                     }}
-                    className="oneParticipant-block-createRoom hover-this-block-class"
+                    className="oneParticipant-block-createRoom_Phone hover-this-block-class_Phone"
                     key={index}
                   >
                     {" "}
@@ -206,4 +211,4 @@ const CreateRoom: React.FC<Props> = ({
   );
 };
 
-export default CreateRoom;
+export default CreateRoom_Phone;

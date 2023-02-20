@@ -1,9 +1,10 @@
 import {useContext, useEffect, useState} from "react";
+import MenuIcon from "../Compionents/MenuIcon";
 import {FunctionContext} from "../Contexts/FunctionsContextProvider";
-import "../Style/menu.css";
 import {TypeFunctionsContext} from "../types";
-import CreateRoom from "./CreateRoom";
-import MenuIcon from "./MenuIcon";
+import CreateRoom_Phone from "./CreateRoom_Phone";
+
+import "./menu_Phone.css";
 
 interface Props {
   // classes: string;
@@ -11,7 +12,7 @@ interface Props {
   setShowMenu: (state: boolean) => void;
 }
 
-const NavBarOption: React.FC<Props> = ({showMenu, setShowMenu}) => {
+const Menu_Phone: React.FC<Props> = ({showMenu, setShowMenu}) => {
   const {logout} = useContext(FunctionContext) as TypeFunctionsContext;
 
   const [showNewRoomWindow, setShowNewRoomWindow] = useState<boolean | null>(
@@ -43,7 +44,7 @@ const NavBarOption: React.FC<Props> = ({showMenu, setShowMenu}) => {
           clickParent(e);
         }}
         className={
-          "main-menu " +
+          "main-menu_Phone " +
           (showMenu != null
             ? showMenu
               ? "main-menuIn-Animation"
@@ -51,9 +52,9 @@ const NavBarOption: React.FC<Props> = ({showMenu, setShowMenu}) => {
             : "")
         }
       >
-        <div data-value="parent" className="areaOfCreateRoom-menu">
+        <div data-value="parent" className="areaOfCreateRoom-menu_Phone">
           {/* {showNewRoomWindow && ( */}
-          <CreateRoom
+          <CreateRoom_Phone
             animationClass={
               showNewRoomWindow != null
                 ? showNewRoomWindow
@@ -70,17 +71,17 @@ const NavBarOption: React.FC<Props> = ({showMenu, setShowMenu}) => {
 
       <div
         className={
-          "menuWindow-menu " +
+          "menuWindow-menu_Phone " +
           (showMenu != null ? (showMenu ? "slide-left" : "slide-right") : "")
         }
       >
-        <div className="menuIconContiner-menu">
+        <div className="menuIconContiner-menu_Phone">
           <div
             onClick={() => {
               showMenu ? setShowMenu(!showMenu) : setShowMenu(true);
             }}
           >
-            <MenuIcon height="35px" classes="rotete" />
+            <MenuIcon height="25px" classes="rotete" />
           </div>
         </div>
 
@@ -95,7 +96,8 @@ const NavBarOption: React.FC<Props> = ({showMenu, setShowMenu}) => {
 
         <div> my friends </div>
         <div> settings </div>
-        <button className="logoutButton-menu" onClick={logout}>
+        
+        <button className="logoutButton-menu_Phone" onClick={logout}>
           Logout
         </button>
       </div>
@@ -103,4 +105,4 @@ const NavBarOption: React.FC<Props> = ({showMenu, setShowMenu}) => {
   );
 };
 
-export default NavBarOption;
+export default Menu_Phone;
