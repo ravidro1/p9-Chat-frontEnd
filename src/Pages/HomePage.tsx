@@ -26,6 +26,7 @@ const HomePage: React.FC<Props> = () => {
     setAllUserMessages,
     setTypingQueue,
     setUsersList,
+    allUserRooms,
   } = useContext(DataContext) as TypeDataContext;
 
   const {getAllUserRoom, joinSingelRoomToSocket, getAllUserMessages} =
@@ -81,6 +82,16 @@ const HomePage: React.FC<Props> = () => {
         ...prev,
         recive,
       ]);
+
+      setAllUserRooms((prev) => {
+        const messageRoomIndex = prev.findIndex(
+          (item) => item._id == recive.room
+        );
+
+        const copyOfArray = [...prev];
+        copyOfArray[messageRoomIndex].lastTimeActive = new Date();
+        return copyOfArray;
+      });
 
       setMessageRecive(recive);
     });

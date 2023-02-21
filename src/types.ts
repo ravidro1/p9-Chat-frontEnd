@@ -6,6 +6,21 @@ export type userType = {
   _id: string;
   previousRooms: [string];
   previousMessages: [string];
+
+  friendsList?: string[];
+  FriendRequestsSentToUserInPending: [
+    {
+      from: {};
+      time: {};
+    }
+  ];
+
+  FriendRequestsSentFromUserInPending: [
+    {
+      to: {};
+      time: {};
+    }
+  ];
 };
 
 export type roomType = {
@@ -16,6 +31,8 @@ export type roomType = {
   creator?: string;
 
   numberOfUnreadMessages?: number;
+
+  lastTimeActive?: Date;
 
   // isTyping?: {sender: string; typing: boolean};
 };

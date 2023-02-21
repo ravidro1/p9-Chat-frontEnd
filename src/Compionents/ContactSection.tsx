@@ -7,17 +7,35 @@ import {DataContext} from "../Contexts/DataContextProvider";
 interface Props {}
 
 const ContactWindow: React.FC<Props> = () => {
-  const {allUserRooms, currentRoom, setCurrentRoom} = useContext(
-    DataContext
-  ) as TypeDataContext;
+  const {allUserRooms, currentRoom, setCurrentRoom, allUserMessages} =
+    useContext(DataContext) as TypeDataContext;
 
   const [searchRoomList, setSearchRoomList] = useState<
     roomType[] | undefined
   >();
 
   useEffect(() => {
-    setSearchRoomList(allUserRooms);
-    console.log(allUserRooms);
+    setSearchRoomList(
+      allUserRooms?.sort((a, b) => {
+        if (a?.lastTimeActive && b?.lastTimeActive) {
+          if (
+            new Date(b?.lastTimeActive).getTime() -
+              new Date(a?.lastTimeActive).getTime() >
+            0
+          )
+            return 1;
+          else if (
+            new Date(b?.lastTimeActive).getTime() -
+              new Date(a?.lastTimeActive).getTime() <
+            0
+          )
+            return -1;
+          else return 0;
+        } else {
+          return 0;
+        }
+      })
+    );
 
     if (currentRoom) {
       setCurrentRoom(
@@ -26,9 +44,30 @@ const ContactWindow: React.FC<Props> = () => {
     }
   }, [allUserRooms]);
 
+  // useEffect(() => {
+  //   console.log(
+  //     allUserRooms?.sort((a, b) => {
+  //       if (a?.lastTimeActive && b?.lastTimeActive) {
+  //         console.log(
+  //           new Date(a?.lastTimeActive).getTime() -
+  //             new Date(b?.lastTimeActive).getTime()
+  //         );
+
+  //         return (
+  //           new Date(a?.lastTimeActive).getTime() -
+  //           new Date(b?.lastTimeActive).getTime()
+  //         );
+  //       } else {
+  //         return 0;
+  //       }
+  //     })
+  //   );
+  // }, [allUserRooms]);
+
   const updateRoomBySearch = (searchValue: string) => {
-    const searchedRoomArray = allUserRooms?.filter((room) =>
-      room.name.includes(searchValue)
+    const searchedRoomArray = allUserRooms?.filter(
+      (room) => room.name.toLowerCase().includes(searchValue)
+      // room.name.includes(searchValue)
     );
     setSearchRoomList(searchedRoomArray);
   };

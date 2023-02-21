@@ -21,7 +21,7 @@ const ChatWindowSendMessage: React.FC<{}> = ({}) => {
   const [canTyping, setCanTyping] = useState(true);
 
   const sendMessage = () => {
-    if (isSuccess) {
+    if (isSuccess && tempMessageContent) {
       setIsSuccess(false);
       setCanTyping(false);
 
@@ -41,6 +41,16 @@ const ChatWindowSendMessage: React.FC<{}> = ({}) => {
               creationTime: currentTime,
             };
             setTempMessageContent("");
+
+            setAllUserRooms((prev) => {
+              const messageRoomIndex = prev.findIndex(
+                (item) => item._id == newMessage.room
+              );
+
+              const copyOfArray = [...prev];
+              copyOfArray[messageRoomIndex].lastTimeActive = new Date();
+              return copyOfArray;
+            });
 
             if (allUserMessages)
               setAllUserMessages((prev) => [...prev, newMessageWithID]);

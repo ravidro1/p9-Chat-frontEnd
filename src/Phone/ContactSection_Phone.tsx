@@ -29,7 +29,7 @@ const ContactWindow_Phone: React.FC<Props> = ({}) => {
 
   const updateRoomBySearch = (searchValue: string) => {
     const searchedRoomArray = allUserRooms?.filter((room) =>
-      room.name.includes(searchValue)
+      room.name.toLowerCase().includes(searchValue)
     );
     setSearchRoomList(searchedRoomArray);
   };
