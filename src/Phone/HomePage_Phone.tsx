@@ -84,6 +84,16 @@ const HomePage_Phone: React.FC<Props> = () => {
         recive,
       ]);
 
+      setAllUserRooms((prev) => {
+        const messageRoomIndex = prev.findIndex(
+          (item) => item._id == recive.room
+        );
+
+        const copyOfArray = [...prev];
+        copyOfArray[messageRoomIndex].lastTimeActive = new Date();
+        return copyOfArray;
+      });
+
       setMessageRecive(recive);
     });
 

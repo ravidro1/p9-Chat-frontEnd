@@ -17,8 +17,27 @@ const ContactWindow_Phone: React.FC<Props> = ({}) => {
   >();
 
   useEffect(() => {
-    setSearchRoomList(allUserRooms);
-    console.log(allUserRooms);
+    setSearchRoomList(
+      allUserRooms?.sort((a, b) => {
+        if (a?.lastTimeActive && b?.lastTimeActive) {
+          if (
+            new Date(b?.lastTimeActive).getTime() -
+              new Date(a?.lastTimeActive).getTime() >
+            0
+          )
+            return 1;
+          else if (
+            new Date(b?.lastTimeActive).getTime() -
+              new Date(a?.lastTimeActive).getTime() <
+            0
+          )
+            return -1;
+          else return 0;
+        } else {
+          return 0;
+        }
+      })
+    );
 
     if (currentRoom) {
       setCurrentRoom(
