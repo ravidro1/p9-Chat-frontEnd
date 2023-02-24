@@ -1,4 +1,4 @@
-.continer-createRoom {
+.continer-createRoomOrFriendsList {
   width: 75%;
   height: 60%;
   background-color: whitesmoke;
@@ -26,9 +26,11 @@
 @keyframes slide-bck-center {
   0% {
     transform: perspective(200px) scale(1);
+    z-index: 4;
   }
   100% {
     transform: perspective(200px) scale(0);
+    z-index: 0;
   }
 }
 
@@ -42,9 +44,11 @@
   from {
     /* transform: translateZ(-400px); */
     transform: perspective(200px) scale(0);
+    z-index: 0;
   }
   to {
     transform: perspective(200px) scale(1);
+    z-index: 4;
   }
 }
 

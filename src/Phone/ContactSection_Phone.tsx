@@ -1,57 +1,20 @@
 import react, {useState, useEffect, useContext} from "react";
 import {roomType, TypeDataContext} from "../types";
-import OneContact from "./OneContact_Phone";
 import {DataContext} from "../Contexts/DataContextProvider";
 
-import "./contantSection_Phone.css";
+import "./Phone_Style/contantSection_Phone.css";
+import OneContact from "../Compionents/OneContact";
 
-interface Props {}
+interface Props {
+  updateRoomBySearch: (searchValue: string) => void;
+  searchRoomList: roomType[] | undefined;
+}
 
-const ContactWindow_Phone: React.FC<Props> = ({}) => {
-  const {allUserRooms, currentRoom, setCurrentRoom} = useContext(
-    DataContext
-  ) as TypeDataContext;
-
-  const [searchRoomList, setSearchRoomList] = useState<
-    roomType[] | undefined
-  >();
-
-  useEffect(() => {
-    setSearchRoomList(
-      allUserRooms?.sort((a, b) => {
-        if (a?.lastTimeActive && b?.lastTimeActive) {
-          if (
-            new Date(b?.lastTimeActive).getTime() -
-              new Date(a?.lastTimeActive).getTime() >
-            0
-          )
-            return 1;
-          else if (
-            new Date(b?.lastTimeActive).getTime() -
-              new Date(a?.lastTimeActive).getTime() <
-            0
-          )
-            return -1;
-          else return 0;
-        } else {
-          return 0;
-        }
-      })
-    );
-
-    if (currentRoom) {
-      setCurrentRoom(
-        allUserRooms?.find((room) => room._id == currentRoom?._id)
-      );
-    }
-  }, [allUserRooms]);
-
-  const updateRoomBySearch = (searchValue: string) => {
-    const searchedRoomArray = allUserRooms?.filter((room) =>
-      room.name.toLowerCase().includes(searchValue)
-    );
-    setSearchRoomList(searchedRoomArray);
-  };
+const ContactWindow_Phone: React.FC<Props> = ({
+  updateRoomBySearch,
+  searchRoomList,
+}) => {
+  const {allUserRooms} = useContext(DataContext) as TypeDataContext;
 
   return (
     <div className="main-contantSection_Phone">

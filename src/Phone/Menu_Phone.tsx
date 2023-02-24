@@ -1,41 +1,34 @@
 import {useContext, useEffect, useState} from "react";
+import CreateRoom from "../Compionents/CreateRoom";
+import FriendsListWindow from "../Compionents/FriendsListWindow";
 import MenuIcon from "../Compionents/MenuIcon";
 import {FunctionContext} from "../Contexts/FunctionsContextProvider";
 import {TypeFunctionsContext} from "../types";
-import CreateRoom_Phone from "./CreateRoom_Phone";
 
-import "./menu_Phone.css";
+import "./Phone_Style/menu_Phone.css";
 
 interface Props {
   // classes: string;
   showMenu: boolean | null;
   setShowMenu: (state: boolean) => void;
+
+  clickParent: (event: React.MouseEvent) => void;
+  showNewRoomWindow: boolean | null;
+  setShowNewRoomWindow: (value: React.SetStateAction<boolean | null>) => void;
+  turnOffTheOtherButtons: (thisButton: string) => void;
+  showFriendsListWindow: boolean | null;
 }
 
-const Menu_Phone: React.FC<Props> = ({showMenu, setShowMenu}) => {
+const Menu_Phone: React.FC<Props> = ({
+  showMenu,
+  setShowMenu,
+  clickParent,
+  showNewRoomWindow,
+  setShowNewRoomWindow,
+  turnOffTheOtherButtons,
+  showFriendsListWindow,
+}) => {
   const {logout} = useContext(FunctionContext) as TypeFunctionsContext;
-
-  const [showNewRoomWindow, setShowNewRoomWindow] = useState<boolean | null>(
-    null
-  );
-
-  useEffect(() => {
-    if (!showMenu && showNewRoomWindow) {
-      setShowNewRoomWindow(false);
-    }
-  }, [showMenu]);
-
-  const clickParent = (event: React.MouseEvent) => {
-    event.preventDefault();
-    let dataValue = (event.target as HTMLElement).getAttribute("data-value");
-    if (dataValue == "parent") {
-      console.log("parent clicked");
-      setShowMenu(false);
-      // setShowNewRoomWindow(null);
-    } else {
-      console.log("c");
-    }
-  };
 
   return (
     <>
@@ -52,9 +45,8 @@ const Menu_Phone: React.FC<Props> = ({showMenu, setShowMenu}) => {
             : "")
         }
       >
-        <div data-value="parent" className="areaOfCreateRoom-menu_Phone">
-          {/* {showNewRoomWindow && ( */}
-          <CreateRoom_Phone
+        <div data-value="parent" className="createRoomOrFriendsList-menu_Phone">
+          <CreateRoom
             animationClass={
               showNewRoomWindow != null
                 ? showNewRoomWindow
@@ -65,7 +57,15 @@ const Menu_Phone: React.FC<Props> = ({showMenu, setShowMenu}) => {
             showMenu={showMenu}
             setShowMenu={setShowMenu}
           />
-          {/* )} */}
+          <FriendsListWindow
+            animationClass={
+              showFriendsListWindow != null
+                ? showFriendsListWindow
+                  ? "slide-fwd-center"
+                  : "slide-bck-center"
+                : ""
+            }
+          />
         </div>
       </div>
 
@@ -88,15 +88,22 @@ const Menu_Phone: React.FC<Props> = ({showMenu, setShowMenu}) => {
         <button
           onClick={() => {
             // setShowMenu(false);
-            setShowNewRoomWindow(!showNewRoomWindow);
+            turnOffTheOtherButtons("newRoom");
           }}
         >
           new room
         </button>
+        <br />
+        <button
+          onClick={() => {
+            turnOffTheOtherButtons("friendsList");
+          }}
+        >
+          friends list
+        </button>
 
-        <div> my friends </div>
         <div> settings </div>
-        
+
         <button className="logoutButton-menu_Phone" onClick={logout}>
           Logout
         </button>

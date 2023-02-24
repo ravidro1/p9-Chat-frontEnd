@@ -9,20 +9,28 @@ import "../Style/createRoom.css";
 import {socket} from "../App";
 import {DataContext} from "../Contexts/DataContextProvider";
 import {FunctionContext} from "../Contexts/FunctionsContextProvider";
+import CreateRoom_Phone from "../Phone/CreateRoom_Phone";
 
 interface Props {
   showMenu: boolean | null;
   setShowMenu: (state: boolean) => void;
+
   animationClass: string;
 }
 
 const CreateRoom: React.FC<Props> = ({
   setShowMenu,
-  animationClass,
   showMenu,
+  animationClass,
 }) => {
-  const {currentUser, allUserRooms, setAllUserRooms, idAndToken, usersList} =
-    useContext(DataContext) as TypeDataContext;
+  const {
+    currentUser,
+    allUserRooms,
+    setAllUserRooms,
+    idAndToken,
+    usersList,
+    windowWidthForPhone,
+  } = useContext(DataContext) as TypeDataContext;
   const {joinSingelRoomToSocket} = useContext(
     FunctionContext
   ) as TypeFunctionsContext;
@@ -47,19 +55,6 @@ const CreateRoom: React.FC<Props> = ({
     if (idAndToken?.id)
       setNewRoomData({name: "", participants: [idAndToken?.id]});
   }, [idAndToken?.id]);
-
-  // useEffect(() => {
-  //   socket.on("recive-newRoom", (receive: roomType) => {
-  //     console.log(receive);
-  //     if (receive._id) joinSingelRoomToSocket(receive._id, socket);
-  //     console.log("dsaassa");
-
-  //     setAllUserRooms((prev: roomType[]): roomType[] => [...prev, receive]);
-  //   });
-  //   return () => {
-  //     socket.off("recive-newRoom");
-  //   };
-  // }, []);
 
   const createRoom = () => {
     const tempCreatorAndTime = {
@@ -95,8 +90,6 @@ const CreateRoom: React.FC<Props> = ({
       const isUserAlreadyIn = newRoomData?.participants?.includes(
         newParticipant?._id
       );
-      // console.log(isUserAlreadyIn);
-
       if (newRoomData.participants && !isUserAlreadyIn) {
         const tempParticipants = [...newRoomData?.participants];
         tempParticipants.push(newParticipant._id);
@@ -110,99 +103,117 @@ const CreateRoom: React.FC<Props> = ({
   };
 
   return (
-    <div data-value="child" className={"continer-createRoom " + animationClass}>
-      {/* <div className="main-createRoom"> */}
+    <>
+      {windowWidthForPhone ? (
+        <CreateRoom_Phone
+          addParticipant={addParticipant}
+          animationClass={animationClass}
+          createRoom={createRoom}
+          currentUser={currentUser}
+          newRoomData={newRoomData}
+          setNewRoomData={setNewRoomData}
+          setShowMenu={setShowMenu}
+          setTempNewParticipant={setTempNewParticipant}
+          showMenu={showMenu}
+          tempNewParticipant={tempNewParticipant}
+          usersList={usersList}
+        />
+      ) : (
+        <div className={"continer-createRoomOrFriendsList " + animationClass}>
+          <div className="inputs-area-createRoom">
+            <div className="inputAndButton-block-createRoom">
+              <input
+                className="inputs-createRoom"
+                onChange={(e) => setTempNewParticipant(e.target.value.trim())}
+                value={tempNewParticipant}
+                placeholder="Participants"
+                list="users"
+              />
 
-      <div className="inputs-area-createRoom">
-        <div className="inputAndButton-block-createRoom">
-          <input
-            className="inputs-createRoom"
-            onChange={(e) => setTempNewParticipant(e.target.value.trim())}
-            value={tempNewParticipant}
-            placeholder="Participants"
-            list="users"
-          />
-
-          <div
-            className="addParticipantAndCreateRoom-button-createRoom"
-            onClick={() => addParticipant(tempNewParticipant)}
-          >
-            Add Participant
-          </div>
-        </div>
-
-        <div className="inputAndButton-block-createRoom">
-          <input
-            className="inputs-createRoom"
-            value={newRoomData?.name}
-            onChange={(e) =>
-              setNewRoomData({...newRoomData, name: e.target.value.trim()})
-            }
-            placeholder="Room Name"
-          />
-          {newRoomData.participants &&
-            newRoomData.name &&
-            !tempNewParticipant && (
               <div
                 className="addParticipantAndCreateRoom-button-createRoom"
-                onClick={createRoom}
+                onClick={() => addParticipant(tempNewParticipant)}
               >
-                {" "}
-                Create Room{" "}
+                Add Participant
               </div>
-            )}
-        </div>
-      </div>
+            </div>
 
-      <div className="Participants-window-continer-createRoom">
-        <div className="Participants-window-createRoom">
-          {newRoomData?.participants?.map((userID, index) => {
-            const user = usersList?.find((item) => item._id == userID);
-            if (user) {
-              if (userID == currentUser?._id) {
-                return (
-                  <div className="oneParticipant-block-createRoom" key={index}>
-                    {" "}
-                    {user.username}
-                  </div>
-                );
-              } else {
-                return (
+            <div className="inputAndButton-block-createRoom">
+              <input
+                className="inputs-createRoom"
+                value={newRoomData?.name}
+                onChange={(e) =>
+                  setNewRoomData({...newRoomData, name: e.target.value.trim()})
+                }
+                placeholder="Room Name"
+              />
+              {newRoomData.participants &&
+                newRoomData.name &&
+                !tempNewParticipant && (
                   <div
-                    onClick={() => {
-                      setNewRoomData({
-                        ...newRoomData,
-                        participants: newRoomData?.participants?.filter(
-                          (item) => item != userID
-                        ),
-                      });
-                    }}
-                    className="oneParticipant-block-createRoom hover-this-block-class"
-                    key={index}
+                    className="addParticipantAndCreateRoom-button-createRoom"
+                    onClick={createRoom}
                   >
                     {" "}
-                    {user.username}
+                    Create Room{" "}
                   </div>
+                )}
+            </div>
+          </div>
+
+          <div className="Participants-window-continer-createRoom">
+            <div className="Participants-window-createRoom">
+              {newRoomData?.participants?.map((userID, index) => {
+                const user = usersList?.find((item) => item._id == userID);
+                if (user) {
+                  if (userID == currentUser?._id) {
+                    return (
+                      <div
+                        className="oneParticipant-block-createRoom"
+                        key={index}
+                      >
+                        {" "}
+                        {user.username}
+                      </div>
+                    );
+                  } else {
+                    return (
+                      <div
+                        onClick={() => {
+                          setNewRoomData({
+                            ...newRoomData,
+                            participants: newRoomData?.participants?.filter(
+                              (item) => item != userID
+                            ),
+                          });
+                        }}
+                        className="oneParticipant-block-createRoom hover-this-block-class"
+                        key={index}
+                      >
+                        {" "}
+                        {user.username}
+                      </div>
+                    );
+                  }
+                }
+              })}
+            </div>
+          </div>
+
+          <datalist id="users">
+            {usersList?.map((user, index) => {
+              if (!newRoomData.participants?.includes(user._id)) {
+                return (
+                  <option key={index} value={String(user.username)}>
+                    {user.username}
+                  </option>
                 );
               }
-            }
-          })}
+            })}
+          </datalist>
         </div>
-      </div>
-
-      <datalist id="users">
-        {usersList?.map((user, index) => {
-          if (!newRoomData.participants?.includes(user._id)) {
-            return (
-              <option key={index} value={String(user.username)}>
-                {user.username}
-              </option>
-            );
-          }
-        })}
-      </datalist>
-      {/* </div> */}
-    </div>
+      )}
+    </>
   );
 };
 

@@ -1,13 +1,18 @@
-import {TypeMessage} from "../types";
+import {TypeDataContext, TypeMessage} from "../types";
 import "../Style/chatWindowContent.css";
-import {useEffect, useRef} from "react";
+import {useEffect, useRef, useContext} from "react";
 import OneMessage from "./OneMessage";
+import {DataContext} from "../Contexts/DataContextProvider";
 
 interface Props {
   allCurrentRoomMessages: TypeMessage[] | undefined;
 }
 
 const ChatWindowContent: React.FC<Props> = ({allCurrentRoomMessages}) => {
+  const {currentRoom, allUserMessages, windowWidthForPhone} = useContext(
+    DataContext
+  ) as TypeDataContext;
+
   const lastMessageRef = useRef<null | HTMLDivElement>(null);
 
   useEffect(() => {
@@ -15,6 +20,7 @@ const ChatWindowContent: React.FC<Props> = ({allCurrentRoomMessages}) => {
   }, [allCurrentRoomMessages]);
 
   return (
+    
     <div className="main-chatWindowContent">
       {allCurrentRoomMessages?.map((message, index) => {
         return (

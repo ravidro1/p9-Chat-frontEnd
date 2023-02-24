@@ -25,12 +25,6 @@
   margin-left: 4%;
 }
 
-/* .nameOfRoom-ChatWindowHeader {
-}
-
-.numberOfMembers-ChatWindowHeader {
-} */
-
 .rightSide-ChatWindowHeader {
   height: 100%;
 
@@ -44,7 +38,7 @@
   font-size: 1vw;
 }
 
-@media only screen and (max-width: 830px) {
+@media only screen and (max-width: 950px) {
   .main-ChatWindowHeader {
     font-size: 3.15vw;
   }

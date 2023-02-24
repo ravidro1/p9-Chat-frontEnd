@@ -100,12 +100,30 @@
   padding-right: 1.5%;
 }
 
-.areaOfCreateRoom-menu {
+.createRoomOrFriendsList-menu {
   background-color: transparent;
   width: 75%;
   height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
+
+  position: relative;
 }
 
+.continer-createRoomOrFriendsList {
+  width: 75%;
+  height: 60%;
+  background-color: whitesmoke;
+  border: solid 2px rgba(0, 0, 0, 0.5);
+  border-radius: 0.8vw;
+  /* position: relative; */
+  transform: perspective(200px) scale(0);
+  display: flex;
+
+  color: whitesmoke;
+
+  position: absolute;
+  top: 50;
+  left: 50;
+}

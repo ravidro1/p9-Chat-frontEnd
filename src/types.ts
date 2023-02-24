@@ -7,20 +7,10 @@ export type userType = {
   previousRooms: [string];
   previousMessages: [string];
 
-  friendsList?: string[];
-  FriendRequestsSentToUserInPending: [
-    {
-      from: {};
-      time: {};
-    }
-  ];
-
-  FriendRequestsSentFromUserInPending: [
-    {
-      to: {};
-      time: {};
-    }
-  ];
+  friendsList: string[];
+  FriendRequestsSentToUserInPending: string[];
+  FriendRequestsSentFromUserInPending: string[];
+  FriendRequestsUserSentThatDeny: string[];
 };
 
 export type roomType = {
@@ -77,6 +67,11 @@ export type TypeDataContext = {
   setTypingQueue: react.Dispatch<
     react.SetStateAction<{senders: string[]; roomID: string}[]>
   >;
+
+  allUserFriends?: userType[];
+  setAllUserFriends: react.Dispatch<react.SetStateAction<userType[]>>;
+
+  windowWidthForPhone: boolean;
 };
 
 export type TypeSizeContext = {

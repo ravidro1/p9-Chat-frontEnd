@@ -1,5 +1,4 @@
-import axios from "axios";
-import react, {useContext, useEffect, useState} from "react";
+import react, {useContext, useEffect, useState, useRef} from "react";
 import "../Style/chatWindow.css";
 import {TypeDataContext, TypeMessage, userType} from "../types";
 import ChatWindowContent from "./ChatWindowContent";
@@ -7,17 +6,16 @@ import ChatWindowHeader from "./ChatWindowHeader";
 import ChatWindowSendMessage from "./ChatWindowSendMessage";
 
 import "../Style/chatWindow.css";
+import "../Phone/Phone_Style/chatWindow_Phone.css";
 import {DataContext} from "../Contexts/DataContextProvider";
-import {socket} from "../App";
 
 import {useLottie} from "lottie-react";
-// import robot from "../assets/robot.json";
 import robot from "../assets/113801-robot-green-eyes.json";
 
 interface Props {}
 
 const ChatWindow: React.FC<Props> = ({}) => {
-  const {currentRoom, allUserMessages} = useContext(
+  const {currentRoom, allUserMessages, windowWidthForPhone} = useContext(
     DataContext
   ) as TypeDataContext;
 
@@ -42,7 +40,12 @@ const ChatWindow: React.FC<Props> = ({}) => {
   const {View} = useLottie(options);
 
   return (
-    <div className="main-chatWindow">
+    <div
+      className={
+        windowWidthForPhone ? "main-chatWindow_Phone" : "main-chatWindow"
+        // "main-chatWindow"
+      }
+    >
       {currentRoom ? (
         <>
           <ChatWindowHeader />

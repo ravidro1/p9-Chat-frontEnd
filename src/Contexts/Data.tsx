@@ -16,10 +16,27 @@ const Data = (): TypeDataContext => {
   const [currentRoom, setCurrentRoom] = useState<roomType | undefined>();
   const [allUserRooms, setAllUserRooms] = useState<roomType[]>([]);
   const [allUserMessages, setAllUserMessages] = useState<TypeMessage[]>([]);
+  const [allUserFriends, setAllUserFriends] = useState<userType[]>([]);
 
   const [typingQueue, setTypingQueue] = useState<
     {senders: string[]; roomID: string}[]
   >([]);
+
+  const [windowWidthForPhone, setWindowWidthForPhone] = useState<boolean>(
+    window.innerWidth < 950
+  );
+
+  useEffect(() => {
+    const handleWindowResize = () => {
+      setWindowWidthForPhone(window.innerWidth < 950);
+    };
+
+    window.addEventListener("resize", handleWindowResize);
+
+    return () => {
+      window.removeEventListener("resize", handleWindowResize);
+    };
+  });
 
   return {
     idAndToken,
@@ -42,6 +59,11 @@ const Data = (): TypeDataContext => {
 
     typingQueue,
     setTypingQueue,
+
+    allUserFriends,
+    setAllUserFriends,
+
+    windowWidthForPhone,
   };
 };
 

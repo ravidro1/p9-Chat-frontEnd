@@ -18,13 +18,17 @@ const FunctionsContext = (): TypeFunctionsContext => {
     setUsersList,
     setCurrentRoom,
     setAllUserRooms,
+    setAllUserFriends,
+    currentUser,
   } = useContext(DataContext) as TypeDataContext;
 
   const navigate = useNavigate();
 
   const logout = () => {
     axios
-      .post(`${process.env.REACT_APP_EXPRESS_PORT}/Logout`, {id: idAndToken?.id})
+      .post(`${process.env.REACT_APP_EXPRESS_PORT}/Logout`, {
+        id: idAndToken?.id,
+      })
       .then((res) => {
         setIdAndToken(undefined);
         setCurrentUser(undefined);
@@ -32,6 +36,7 @@ const FunctionsContext = (): TypeFunctionsContext => {
         setCurrentRoom(undefined);
         setAllUserRooms([]);
         setAllUserMessages([]);
+        setAllUserFriends([]);
 
         console.log("Logout");
         sessionStorage.removeItem("id");
@@ -48,7 +53,10 @@ const FunctionsContext = (): TypeFunctionsContext => {
   ): Promise<userType | undefined> => {
     let result;
     try {
-      result = await axios.post(`${process.env.REACT_APP_EXPRESS_PORT}/GetOneUser`, {id});
+      result = await axios.post(
+        `${process.env.REACT_APP_EXPRESS_PORT}/GetOneUser`,
+        {id}
+      );
     } catch (err) {
       console.log(err);
     }
@@ -80,12 +88,31 @@ const FunctionsContext = (): TypeFunctionsContext => {
     }
   }, [sessionStorage.getItem("id")]);
 
+  useEffect(() => {
+    if (currentUser) {
+      axios
+        .post(`${process.env.REACT_APP_EXPRESS_PORT}/GetAllFriendsList`, {
+          user_id: currentUser._id,
+        })
+        .then((res) => {
+          // console.log(res.data.friendsList);
+
+          setAllUserFriends(res.data.friendsList);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
+  }, [currentUser]);
+
   const getAllUser = (currentUserID: string) => {
     getCurrentUser(currentUserID);
 
     axios
       .post(`${process.env.REACT_APP_EXPRESS_PORT}/GetAllUsers`)
       .then((res) => {
+        console.log(res.data.users);
+
         setUsersList(res.data.users);
       })
       .catch((err) => {

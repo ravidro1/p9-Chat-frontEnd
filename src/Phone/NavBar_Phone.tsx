@@ -1,15 +1,11 @@
 import {useContext, useState} from "react";
 import MenuIcon from "../Compionents/MenuIcon";
-import {DataContext} from "../Contexts/DataContextProvider";
-import "./navBar_Phone.css";
-import {TypeDataContext} from "../types";
-import Menu_Phone from "./Menu_Phone";
+import "./Phone_Style/navBar_Phone.css";
+import Menu from "../Compionents/Menu";
 
 interface Props {}
 
 const NavBar_Phone: React.FC<Props> = () => {
-  const {} = useContext(DataContext) as TypeDataContext;
-
   const [showMenu, setShowMenu] = useState<boolean | null>(null);
 
   return (
@@ -17,7 +13,7 @@ const NavBar_Phone: React.FC<Props> = () => {
       <img className="logo-NavBar_Phone" src="RaviChat.png" alt="logo" />
 
       {showMenu != null && (
-        <Menu_Phone showMenu={showMenu} setShowMenu={setShowMenu} />
+        <Menu showMenu={showMenu} setShowMenu={setShowMenu} />
       )}
 
       <div

@@ -2,7 +2,6 @@ import axios from "axios";
 import react, {useContext, useEffect, useState} from "react";
 import ChatWindow from "../Compionents/ChatWindow";
 import ContactWindow from "../Compionents/ContactSection";
-import CreateRoom from "../Compionents/CreateRoom";
 import {
   roomType,
   TypeDataContext,
@@ -26,7 +25,9 @@ const HomePage: React.FC<Props> = () => {
     setAllUserMessages,
     setTypingQueue,
     setUsersList,
-    allUserRooms,
+    windowWidthForPhone,
+    currentUser,
+    setCurrentUser,
   } = useContext(DataContext) as TypeDataContext;
 
   const {getAllUserRoom, joinSingelRoomToSocket, getAllUserMessages} =
@@ -120,6 +121,55 @@ const HomePage: React.FC<Props> = () => {
   }, []);
 
   useEffect(() => {
+    if (currentUser) {
+      socket.on("receive-sendFriendshipRequest", (newRequest) => {
+        setCurrentUser({
+          ...currentUser,
+          FriendRequestsSentToUserInPending: [
+            ...currentUser.FriendRequestsSentToUserInPending,
+            newRequest,
+          ],
+          FriendRequestsUserSentThatDeny:
+            currentUser.FriendRequestsUserSentThatDeny.filter(
+              (item) => item != newRequest
+            ),
+        });
+      });
+
+      socket.on("receive-acceptFriendshipRequest", (from, isConfirmOrDeny) => {
+        if (isConfirmOrDeny) {
+          setCurrentUser({
+            ...currentUser,
+            friendsList: [...currentUser.friendsList, from],
+            FriendRequestsSentFromUserInPending: [
+              ...currentUser.FriendRequestsSentFromUserInPending.filter(
+                (item) => item != from
+              ),
+            ],
+          });
+        } else {
+          setCurrentUser({
+            ...currentUser,
+            FriendRequestsUserSentThatDeny: [
+              ...currentUser.FriendRequestsUserSentThatDeny,
+              from,
+            ],
+            FriendRequestsSentFromUserInPending: [
+              ...currentUser.FriendRequestsSentFromUserInPending.filter(
+                (item) => item != from
+              ),
+            ],
+          });
+        }
+      });
+    }
+
+    return () => {
+      socket.off("receive-sendFriendshipRequest");
+    };
+  }, [currentUser]);
+
+  useEffect(() => {
     socket.on(
       "receive-IsTyping",
       (sender: string, typing: boolean, roomID: string) => {
@@ -171,20 +221,39 @@ const HomePage: React.FC<Props> = () => {
   }, []);
 
   return (
-    <div className="main-homePage">
-      <div className="upperSection-homePage">
-        <NavBar />
-      </div>
+    <>
+      {windowWidthForPhone ? (
+        <div className="main-homePagePhone">
+          {currentRoom ? (
+            <div className="chatPage-homePagePhone">
+              <ChatWindow />
+            </div>
+          ) : (
+            <div className="contactPage-homePagePhone">
+              <div className="navBar-homePagePhone">
+                <NavBar />
+              </div>
+              <ContactWindow />
+            </div>
+          )}
+        </div>
+      ) : (
+        <div className="main-homePage">
+          <div className="upperSection-homePage">
+            <NavBar />
+          </div>
 
-      <div className="lowerSection-homePage">
-        <div className="lowerSection-leftSide-homePage">
-          <ContactWindow />
+          <div className="lowerSection-homePage">
+            <div className="lowerSection-leftSide-homePage">
+              <ContactWindow />
+            </div>
+            <div className="lowerSection-rightSide-homePage">
+              <ChatWindow />
+            </div>
+          </div>
         </div>
-        <div className="lowerSection-rightSide-homePage">
-          <ChatWindow />
-        </div>
-      </div>
-    </div>
+      )}
+    </>
   );
 };
 

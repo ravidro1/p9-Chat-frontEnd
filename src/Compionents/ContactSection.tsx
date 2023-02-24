@@ -3,12 +3,18 @@ import {roomType, TypeDataContext} from "../types";
 import "../Style/contantSection.css";
 import OneContact from "./OneContact";
 import {DataContext} from "../Contexts/DataContextProvider";
+import ContactWindow_Phone from "../Phone/ContactSection_Phone";
 
 interface Props {}
 
 const ContactWindow: React.FC<Props> = () => {
-  const {allUserRooms, currentRoom, setCurrentRoom, allUserMessages} =
-    useContext(DataContext) as TypeDataContext;
+  const {
+    allUserRooms,
+    currentRoom,
+    setCurrentRoom,
+    windowWidthForPhone,
+    allUserMessages,
+  } = useContext(DataContext) as TypeDataContext;
 
   const [searchRoomList, setSearchRoomList] = useState<
     roomType[] | undefined
@@ -44,70 +50,58 @@ const ContactWindow: React.FC<Props> = () => {
     }
   }, [allUserRooms]);
 
-  // useEffect(() => {
-  //   console.log(
-  //     allUserRooms?.sort((a, b) => {
-  //       if (a?.lastTimeActive && b?.lastTimeActive) {
-  //         console.log(
-  //           new Date(a?.lastTimeActive).getTime() -
-  //             new Date(b?.lastTimeActive).getTime()
-  //         );
-
-  //         return (
-  //           new Date(a?.lastTimeActive).getTime() -
-  //           new Date(b?.lastTimeActive).getTime()
-  //         );
-  //       } else {
-  //         return 0;
-  //       }
-  //     })
-  //   );
-  // }, [allUserRooms]);
-
   const updateRoomBySearch = (searchValue: string) => {
-    const searchedRoomArray = allUserRooms?.filter(
-      (room) => room.name.toLowerCase().includes(searchValue)
-      // room.name.includes(searchValue)
+    const searchedRoomArray = allUserRooms?.filter((room) =>
+      room.name.toLowerCase().includes(searchValue)
     );
     setSearchRoomList(searchedRoomArray);
   };
 
   return (
-    <div className="main-contantSection">
-      <div className="Continer-RoomSearchBox-contantSection">
-        <div className="recentWord-contantSection"> Recent </div>
-        <input
-          className="RoomSearchBox-contantSection"
-          onChange={(e) =>
-            updateRoomBySearch(e.target.value.trim().toLowerCase())
-          }
-          type={"search"}
-          list="rooms"
-          placeholder="Search Room..."
+    <>
+      {windowWidthForPhone ? (
+        <ContactWindow_Phone
+          searchRoomList={searchRoomList}
+          updateRoomBySearch={updateRoomBySearch}
         />
-      </div>
+      ) : (
+        <div className="main-contantSection">
+          <div className="Continer-RoomSearchBox-contantSection">
+            <div className="recentWord-contantSection"> Recent </div>
+            <input
+              className="RoomSearchBox-contantSection"
+              onChange={(e) =>
+                updateRoomBySearch(e.target.value.trim().toLowerCase())
+              }
+              type={"search"}
+              list="rooms"
+              placeholder="Search Room..."
+            />
+          </div>
 
-      <div className="contactList-contactSection">
-        {searchRoomList?.map((oneRoom: roomType, index) => {
-          return <OneContact key={index} oneRoom={oneRoom} />;
-        })}
+          <div className="contactList-contactSection">
+            {searchRoomList?.map((oneRoom: roomType, index) => {
+              return <OneContact key={index} oneRoom={oneRoom} />;
+            })}
 
-        {searchRoomList != undefined &&
-          allUserRooms &&
-          searchRoomList?.length < 1 &&
-          (allUserRooms?.length > 0 ? (
-            <div className="NoMatchingRoomsWereFound">
-              {" "}
-              No Matching Rooms Were Found{" "}
-            </div>
-          ) : (
-            <div className="NoMatchingRoomsWereFound">
-              {" "}
-              Your Room List Empty{" "}
-            </div>
-          ))}
-      </div>
-    </div>
+            {searchRoomList != undefined &&
+              allUserRooms &&
+              searchRoomList?.length < 1 &&
+              (allUserRooms?.length > 0 ? (
+                <div className="NoMatchingRoomsWereFound">
+                  {" "}
+                  No Matching Rooms Were Found{" "}
+                </div>
+              ) : (
+                <div className="NoMatchingRoomsWereFound">
+                  {" "}
+                  Your Room List Empty{" "}
+                </div>
+              ))}
+          </div>
+        </div>
+      )}
+    </>
   );
 };
 
