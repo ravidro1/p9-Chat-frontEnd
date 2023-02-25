@@ -1,73 +1,32 @@
-.continer-createRoomOrFriendsList {
-  width: 75%;
-  height: 60%;
-  background-color: whitesmoke;
-  border: solid 2px rgba(0, 0, 0, 0.5);
-  border-radius: 0.8vw;
-  /* position: relative; */
-  transform: perspective(200px) scale(0);
-  display: flex;
-
-  color: whitesmoke;
-}
-
-.main-createRoom {
+.ParticipantsAndAllFriens-windows-continer-createRoom {
   width: 100%;
-  height: 15%;
+  height: 75%;
 
   display: flex;
-}
-
-.slide-bck-center {
-  /* background-color: palevioletred; */
-  animation: slide-bck-center 0.5s forwards;
-}
-
-@keyframes slide-bck-center {
-  0% {
-    transform: perspective(200px) scale(1);
-    z-index: 4;
-  }
-  100% {
-    transform: perspective(200px) scale(0);
-    z-index: 0;
-  }
-}
-
-.slide-fwd-center {
-  /* background-color: blanchedalmond; */
-
-  animation: slide-fwd-center 0.5s forwards;
-}
-
-@keyframes slide-fwd-center {
-  from {
-    /* transform: translateZ(-400px); */
-    transform: perspective(200px) scale(0);
-    z-index: 0;
-  }
-  to {
-    transform: perspective(200px) scale(1);
-    z-index: 4;
-  }
-}
-
-.Participants-window-continer-createRoom {
-  width: 50%;
-  height: 100%;
-
-  display: flex;
-  justify-content: center;
+  justify-content: space-around;
   align-items: center;
 }
 
-.Participants-window-createRoom {
-  height: 80%;
+.itemsBlocks-createRoom {
+  height: 85%;
   background-color: white;
+  overflow-x: hidden;
   overflow-y: scroll;
-  width: 80%;
+  width: 40%;
   border: 1px solid black;
   border-radius: 0.4vw;
+}
+
+.input-allFriends-window-createRoom {
+  outline: none;
+  width: 100%;
+  height: 15%;
+  margin: 0;
+
+  border: none;
+  border-bottom: 1px solid black;
+
+  padding-left: 0.5vw;
 }
 
 .oneParticipant-block-createRoom {
@@ -81,7 +40,21 @@
   align-items: center;
 }
 
-.addParticipantAndCreateRoom-button-createRoom {
+.hover-this-block-class:hover {
+  background-color: #044a5e;
+  cursor: pointer;
+}
+
+.inputAndButton-block-createRoom {
+  width: 100%;
+  height: 15%;
+
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.CreateRoom-button-createRoom {
   border: 1px solid black;
   border-radius: 0.5vw;
   display: flex;
@@ -89,41 +62,19 @@
   align-items: center;
   background-color: #05728f;
 
-  width: 65%;
-  height: 45%;
+  width: 35%;
+  height: 65%;
 }
-.addParticipantAndCreateRoom-button-createRoom:hover {
+
+.CreateRoom-button-createRoom:hover {
   background-color: #044a5e;
 }
 
-.inputs-createRoom {
-  width: 65%;
-  height: 45%;
-}
-
-.inputs-area-createRoom {
-  width: 50%;
-  height: 100%;
-
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-
-  flex-direction: column;
-}
-
-.inputAndButton-block-createRoom {
-  width: 100%;
-  height: 20%;
-
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  flex-direction: column;
-}
-
-.inputs-createRoom:focus {
+.roomName-input-createRoom {
+  width: 35%;
+  height: 65%;
   outline: none;
+  padding-left: 0.5vw;
 }
 
 .inputs-createRoom:focus::placeholder {
@@ -131,6 +82,32 @@
   color: black;
 }
 
-.hover-this-block-class:hover {
-  background-color: #044a5e;
+.deleteOrUserNameItem-oneParticipant-createRoom {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.Username-oneParticipant-createRoom {
+  height: 100%;
+  width: 75%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.deleteButton-oneParticipant-createRoom {
+  height: 100%;
+  width: 25%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-left: 1px solid black;
+
+  cursor: pointer;
 }

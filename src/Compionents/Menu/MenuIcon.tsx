@@ -1,4 +1,4 @@
-import "../Style/menuIcon.css";
+import "../../Style/menuIcon.css";
 
 interface Props {
   height: string;

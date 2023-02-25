@@ -1,12 +1,13 @@
-import {useContext, useEffect, useState} from "react";
-import {DataContext} from "../Contexts/DataContextProvider";
-import {FunctionContext} from "../Contexts/FunctionsContextProvider";
-import Menu_Phone from "../Phone/Menu_Phone";
-import "../Style/menu.css";
-import {TypeDataContext, TypeFunctionsContext} from "../types";
+import { useContext, useEffect, useState } from "react";
+import { DataContext } from "../../Contexts/DataContextProvider";
+import { FunctionContext } from "../../Contexts/FunctionsContextProvider";
+import Menu_Phone from "../../Phone/Menu_Phone";
+import "../../Style/menu.css";
+import { TypeDataContext, TypeFunctionsContext } from "../../types";
 import CreateRoom from "./CreateRoom";
-import FriendsListWindow from "./FriendsListWindow";
+import FriendsListWindow from "./FriendsList/FriendsListWindow";
 import MenuIcon from "./MenuIcon";
+import SettingsWindow from "./SettingsWindoow";
 
 interface Props {
   // classes: string;
@@ -14,9 +15,9 @@ interface Props {
   setShowMenu: (state: boolean) => void;
 }
 
-const NavBarOption: React.FC<Props> = ({showMenu, setShowMenu}) => {
-  const {logout} = useContext(FunctionContext) as TypeFunctionsContext;
-  const {windowWidthForPhone} = useContext(DataContext) as TypeDataContext;
+const NavBarOption: React.FC<Props> = ({ showMenu, setShowMenu }) => {
+  const { logout } = useContext(FunctionContext) as TypeFunctionsContext;
+  const { windowWidthForPhone } = useContext(DataContext) as TypeDataContext;
   const [showNewRoomWindow, setShowNewRoomWindow] = useState<boolean | null>(
     null
   );
@@ -24,12 +25,20 @@ const NavBarOption: React.FC<Props> = ({showMenu, setShowMenu}) => {
     boolean | null
   >(null);
 
+  const [showSettingsWindow, setShowSettingsWindow] = useState<boolean | null>(
+    null
+  );
+
   useEffect(() => {
     if (!showMenu && showNewRoomWindow) {
       setShowNewRoomWindow(false);
     }
     if (!showMenu && showFriendsListWindow) {
       setShowFriendsListWindow(false);
+    }
+
+    if (!showMenu && showSettingsWindow) {
+      setShowSettingsWindow(false);
     }
   }, [showMenu]);
 
@@ -46,13 +55,20 @@ const NavBarOption: React.FC<Props> = ({showMenu, setShowMenu}) => {
 
   const turnOffTheOtherButtons = (thisButton: string) => {
     if (thisButton == "friendsList") {
+      if (showSettingsWindow) setShowSettingsWindow(false);
       if (showNewRoomWindow) setShowNewRoomWindow(false);
       if (showFriendsListWindow) setShowFriendsListWindow(false);
       else setShowFriendsListWindow(true);
     } else if (thisButton == "newRoom") {
+      if (showSettingsWindow) setShowSettingsWindow(false);
       if (showFriendsListWindow) setShowFriendsListWindow(false);
       if (showNewRoomWindow) setShowNewRoomWindow(false);
       else setShowNewRoomWindow(true);
+    } else if (thisButton == "settings") {
+      if (showFriendsListWindow) setShowFriendsListWindow(false);
+      if (showNewRoomWindow) setShowNewRoomWindow(false);
+      if (showSettingsWindow) setShowSettingsWindow(false);
+      else setShowSettingsWindow(true);
     }
   };
 
@@ -103,6 +119,17 @@ const NavBarOption: React.FC<Props> = ({showMenu, setShowMenu}) => {
                       : "slide-bck-center"
                     : ""
                 }
+                showFriendsListWindow={showFriendsListWindow}
+              />
+              <SettingsWindow
+                animationClass={
+                  showSettingsWindow != null
+                    ? showSettingsWindow
+                      ? "slide-fwd-center"
+                      : "slide-bck-center"
+                    : ""
+                }
+                showSettingsWindow={showSettingsWindow}
               />
             </div>
           </div>
@@ -127,25 +154,37 @@ const NavBarOption: React.FC<Props> = ({showMenu, setShowMenu}) => {
               </div>
             </div>
 
-            <button
-              onClick={() => {
-                turnOffTheOtherButtons("newRoom");
-              }}
-            >
-              new room
-            </button>
+            <div className="buttonsContiner-menu">
+              <div
+                className="buttons-Menu greenhover-menu"
+                onClick={() => {
+                  turnOffTheOtherButtons("newRoom");
+                }}
+              >
+                new room
+              </div>
 
-            <button
-              onClick={() => {
-                turnOffTheOtherButtons("friendsList");
-              }}
-            >
-              friends list
-            </button>
-            <div> settings </div>
-            <button className="logoutButton-menu" onClick={logout}>
-              Logout
-            </button>
+              <div
+                className="buttons-Menu greenhover-menu"
+                onClick={() => {
+                  turnOffTheOtherButtons("settings");
+                }}
+              >
+                settings
+              </div>
+
+              <div
+                className="buttons-Menu greenhover-menu"
+                onClick={() => {
+                  turnOffTheOtherButtons("friendsList");
+                }}
+              >
+                friends list
+              </div>
+              <div className="buttons-Menu redhover-menu" onClick={logout}>
+                Logout
+              </div>
+            </div>
           </div>
         </>
       )}

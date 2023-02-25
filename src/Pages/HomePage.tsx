@@ -1,7 +1,7 @@
 import axios from "axios";
-import react, {useContext, useEffect, useState} from "react";
-import ChatWindow from "../Compionents/ChatWindow";
-import ContactWindow from "../Compionents/ContactSection";
+import react, { useContext, useEffect, useState } from "react";
+import ChatWindow from "../Compionents/ChatWindow/ChatWindow";
+import ContactWindow from "../Compionents/ContactWindow/ContactSection";
 import {
   roomType,
   TypeDataContext,
@@ -11,9 +11,9 @@ import {
 import "../Style/homePage.css";
 import NavBar from "../Compionents/NavBar";
 import LoginExistCheck from "../Compionents/LoginExistCheck";
-import {DataContext} from "../Contexts/DataContextProvider";
-import {socket} from "../App";
-import {FunctionContext} from "../Contexts/FunctionsContextProvider";
+import { DataContext } from "../Contexts/DataContextProvider";
+import { socket } from "../App";
+import { FunctionContext } from "../Contexts/FunctionsContextProvider";
 
 interface Props {}
 
@@ -30,10 +30,10 @@ const HomePage: React.FC<Props> = () => {
     setCurrentUser,
   } = useContext(DataContext) as TypeDataContext;
 
-  const {getAllUserRoom, joinSingelRoomToSocket, getAllUserMessages} =
+  const { getAllUserRoom, joinSingelRoomToSocket, getAllUserMessages } =
     useContext(FunctionContext) as TypeFunctionsContext;
 
-  const {checkIfLogin} = LoginExistCheck();
+  const { checkIfLogin } = LoginExistCheck();
 
   useEffect(() => {
     checkIfLogin();
@@ -197,7 +197,7 @@ const HomePage: React.FC<Props> = () => {
                 };
               }
             } else {
-              copyOfArray.push({roomID: roomID, senders: [sender]});
+              copyOfArray.push({ roomID: roomID, senders: [sender] });
             }
           } else {
             if (thisCell?.senders?.length > 0) {

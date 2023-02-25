@@ -1,9 +1,9 @@
-import {useContext, useRef, useState, useEffect} from "react";
-import {socket} from "../App";
-import {TypeDataContext, TypeMessage, userType} from "../types";
+import { useContext, useRef, useState, useEffect } from "react";
+import { socket } from "../../App";
+import { TypeDataContext, TypeMessage } from "../../types";
 
-import "../Style/chatWindowSend.css";
-import {DataContext} from "../Contexts/DataContextProvider";
+import "../../Style/chatWindowSend.css";
+import { DataContext } from "../../Contexts/DataContextProvider";
 
 const ChatWindowSendMessage: React.FC<{}> = ({}) => {
   const {

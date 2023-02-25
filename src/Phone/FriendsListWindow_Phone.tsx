@@ -1,5 +1,4 @@
 import react from "react";
-import "./Phone_Style/friendsListWindow.css";
 
 interface Props {
   animationClass: string;

@@ -1,20 +1,24 @@
-import react, {useContext, useEffect, useState} from "react";
-import {TypeDataContext, TypeFunctionsContext, TypeMessage} from "../types";
+import react, { useContext, useEffect, useState } from "react";
+import {
+  TypeDataContext,
+  TypeFunctionsContext,
+  TypeMessage,
+} from "../../types";
 
-import "../Style/oneMessage.css";
-import {DataContext} from "../Contexts/DataContextProvider";
-import {FunctionContext} from "../Contexts/FunctionsContextProvider";
+import "../../Style/oneMessage.css";
+import { DataContext } from "../../Contexts/DataContextProvider";
+import { FunctionContext } from "../../Contexts/FunctionsContextProvider";
 
 interface Props {
   message: TypeMessage;
   lastMessageRef?: React.MutableRefObject<HTMLDivElement | null>;
 }
 
-const OneMessage: React.FC<Props> = ({message, lastMessageRef}) => {
-
-  const {currentUser} = useContext(DataContext) as TypeDataContext;
-  const {getTimeInString} = useContext(FunctionContext) as TypeFunctionsContext;
-
+const OneMessage: React.FC<Props> = ({ message, lastMessageRef }) => {
+  const { currentUser } = useContext(DataContext) as TypeDataContext;
+  const { getTimeInString } = useContext(
+    FunctionContext
+  ) as TypeFunctionsContext;
 
   const [message_alignSelf, setMessage_alignSelf] = useState("");
   const [message_backgroundColor, setMessage_backgroundColor] = useState("");
@@ -29,8 +33,8 @@ const OneMessage: React.FC<Props> = ({message, lastMessageRef}) => {
     if (message.creationTime) {
       const time = new Date(message.creationTime);
       if (time) {
-        const {date, hour} = getTimeInString(time);
-        setTimeString({date, hour});
+        const { date, hour } = getTimeInString(time);
+        setTimeString({ date, hour });
       }
     }
 

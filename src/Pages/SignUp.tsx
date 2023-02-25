@@ -13,8 +13,8 @@ const SignUp: React.FC<Props> = () => {
 
   const navigate = useNavigate();
 
-  const [username, setUsername] = useState<String>("");
-  const [password, setPassword] = useState<String>("");
+  const [username, setUsername] = useState<string | number | undefined>("");
+  const [password, setPassword] = useState<string | number | undefined>("");
   const [errorLine, setErrorLine] = useState<string | undefined>();
 
   useEffect(() => {
@@ -36,14 +36,31 @@ const SignUp: React.FC<Props> = () => {
     //     setErrorLine("Both Input Required");
     //   });
 
-    socket.emit("signup", username, password, () => {
-      console.log("signup ", username, password);
 
-      navigate("/");
-    });
 
-    setUsername("");
-    setPassword("");
+    if(String(username).length < 1 || String(password).length < 1){
+      setErrorLine("Both Input Required");
+    } else {
+      socket.emit("signup", username, password, (isAlreadyExist: boolean) => {
+        console.log("signup ", username, password);
+  
+        if(!isAlreadyExist){
+          navigate("/");
+        } else {
+          setErrorLine("User Already Exist");
+          setUsername("");
+          setPassword("");
+        }
+  
+      });
+    }
+    
+
+
+    
+
+
+
   };
 
   return (
@@ -52,21 +69,23 @@ const SignUp: React.FC<Props> = () => {
         <div className="signUpWord-signUpPage"> Register </div>
         <div className="inputs-signUpPage">
           <input
+            value={username}
             maxLength={15}
             className="input-signUpPage"
             placeholder="Username"
             onChange={(e) => {
-              setUsername(e.target.value.trim());
+              setUsername(String(e.target.value).trim());
               setErrorLine(undefined);
             }}
             type={"text"}
           />
 
           <input
+            value={password}
             className="input-signUpPage"
             placeholder="Password"
             onChange={(e) => {
-              setPassword(e.target.value.trim());
+              setPassword(String(e.target.value).trim());
               setErrorLine(undefined);
             }}
             type={"text"}

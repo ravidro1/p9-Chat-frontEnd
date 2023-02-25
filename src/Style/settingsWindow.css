@@ -1,0 +1,50 @@
+.settingsWindowArea-SettingsWindow {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+
+  flex-direction: column;
+}
+
+.ChangePassword-HeadLine-SettingsWindow {
+  color: black;
+  font-size: 3vw;
+}
+
+.ChangePassword-InputsArea-SettingsWindow {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+
+  flex-direction: column;
+
+  width: 100%;
+  height: 40%;
+}
+
+.ChangePassword-Inputs-SettingsWindow {
+  outline: none;
+  width: 50%;
+  height: 30%;
+  padding: 1.25vw;
+}
+
+.ChangePassword-Inputs-SettingsWindow:focus::placeholder {
+  color: black;
+}
+
+.ChangePassword-Button-SettingsWindow {
+  border: 1px solid black;
+  color: black;
+  border-radius: 0.5vw;
+  font-size: 2vw;
+  padding: 0.5vw;
+  cursor: pointer;
+}
+
+.successOrFailText-SettingsWindow {
+  width: 100%;
+  height: 10%;
+}

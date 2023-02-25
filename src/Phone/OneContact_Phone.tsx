@@ -1,4 +1,4 @@
-import react, {useContext, useEffect, useState} from "react";
+import react, { useContext, useEffect, useState } from "react";
 import {
   roomType,
   TypeDataContext,
@@ -6,10 +6,10 @@ import {
   TypeMessage,
   TypeSizeContext,
 } from "../types";
-import "./Phone_Style/oneContant_Phone.css";
-import {DataContext} from "../Contexts/DataContextProvider";
-import {FunctionContext} from "../Contexts/FunctionsContextProvider";
-import {SizeContext} from "../Contexts/SizesContextProvider";
+// import "./Phone_Style/oneContant_Phone.css";
+import { DataContext } from "../Contexts/DataContextProvider";
+import { FunctionContext } from "../Contexts/FunctionsContextProvider";
+import { SizeContext } from "../Contexts/SizesContextProvider";
 
 interface Props {
   oneRoom: roomType;
@@ -44,9 +44,11 @@ const OneContact_Phone: React.FC<Props> = ({
     setAllUserRooms,
   } = useContext(DataContext) as TypeDataContext;
 
-  const {getTimeInString} = useContext(FunctionContext) as TypeFunctionsContext;
+  const { getTimeInString } = useContext(
+    FunctionContext
+  ) as TypeFunctionsContext;
 
-  const {creationTime_oneContant_ref} = useContext(
+  const { creationTime_oneContant_ref } = useContext(
     SizeContext
   ) as TypeSizeContext;
 

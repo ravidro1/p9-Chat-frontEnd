@@ -8,11 +8,11 @@
 
 .upperSection-homePage {
   width: 100%;
-  height: 12%;
+  height: 11.5vh;
 }
 .lowerSection-homePage {
   width: 100%;
-  height: 88%;
+  height: 88.5vh;
   display: flex;
   border: 1px solid rgba(0, 0, 0, 0.199);
 }
