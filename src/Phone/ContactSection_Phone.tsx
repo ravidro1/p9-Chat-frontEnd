@@ -3,7 +3,7 @@ import {roomType, TypeDataContext} from "../types";
 import {DataContext} from "../Contexts/DataContextProvider";
 
 import "./Phone_Style/contantSection_Phone.css";
-import OneContact from "../Compionents/OneContact";
+import OneContact from "../Compionents/ContactWindow/OneContact";
 
 interface Props {
   updateRoomBySearch: (searchValue: string) => void;

@@ -13,7 +13,6 @@
 .input-chatWindowSendMessage {
   width: 85%;
   height: 95%;
-  /* border-radius: 0.4vw; */
   padding-left: 4%;
   border: none;
   font-family: "Roboto Condensed", sans-serif;
@@ -36,7 +35,6 @@
 .sendButton-chatWindowSendMessage {
   width: 10%;
   height: 60%;
-  /* border: 0.2vw solid black; */
   border-radius: 0.4vw;
   display: flex;
   justify-content: center;

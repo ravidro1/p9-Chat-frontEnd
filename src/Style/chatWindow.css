@@ -25,7 +25,7 @@
   font-size: 2.5vw;
 }
 
-@media only screen and (max-width: 950px) {
+@media only screen and (max-width: 1000px) {
   .emptyChat-text-chatWindow {
     font-size: 4.5vw;
     white-space: wrap;

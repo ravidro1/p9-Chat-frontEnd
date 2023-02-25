@@ -1,7 +1,7 @@
-import {useContext, useState} from "react";
-import MenuIcon from "../Compionents/MenuIcon";
+import { useContext, useState } from "react";
+import MenuIcon from "../Compionents/Menu/MenuIcon";
 import "./Phone_Style/navBar_Phone.css";
-import Menu from "../Compionents/Menu";
+import Menu from "../Compionents/Menu/Menu";
 
 interface Props {}
 

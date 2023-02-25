@@ -1,13 +1,13 @@
-import react, {useContext, useEffect, useState} from "react";
+import react, { useContext, useEffect, useState } from "react";
 import {
   roomType,
   TypeDataContext,
   TypeFunctionsContext,
   userType,
 } from "../types";
-import {socket} from "../App";
-import {DataContext} from "../Contexts/DataContextProvider";
-import {FunctionContext} from "../Contexts/FunctionsContextProvider";
+import { socket } from "../App";
+import { DataContext } from "../Contexts/DataContextProvider";
+import { FunctionContext } from "../Contexts/FunctionsContextProvider";
 
 import "./Phone_Style/createRoom_Phone.css";
 
@@ -16,9 +16,7 @@ interface Props {
   setShowMenu: (state: boolean) => void;
   animationClass: string;
 
-  setTempNewParticipant: (value: react.SetStateAction<string>) => void;
-  tempNewParticipant: string;
-  addParticipant: (newParticipantUsername: string) => void;
+  addParticipant: (newParticipantUsername: userType) => void;
   newRoomData: roomType;
   createRoom: () => void;
   currentUser: userType | undefined;
@@ -31,8 +29,6 @@ const CreateRoom_Phone: React.FC<Props> = ({
   animationClass,
   showMenu,
 
-  setTempNewParticipant,
-  tempNewParticipant,
   addParticipant,
   newRoomData,
   createRoom,
@@ -46,15 +42,13 @@ const CreateRoom_Phone: React.FC<Props> = ({
         <div className="inputAndButton-block-createRoom_Phone">
           <input
             className="inputs-createRoom_Phone"
-            onChange={(e) => setTempNewParticipant(e.target.value.trim())}
-            value={tempNewParticipant}
             placeholder="Participants"
-            list="users"
+            list="friends"
           />
 
           <div
             className="addParticipantAndCreateRoom-button-createRoom_Phone"
-            onClick={() => addParticipant(tempNewParticipant)}
+            // onClick={() => addParticipant(tempNewParticipant)}
           >
             Add Participant
           </div>
@@ -65,21 +59,19 @@ const CreateRoom_Phone: React.FC<Props> = ({
             className="inputs-createRoom_Phone"
             value={newRoomData?.name}
             onChange={(e) =>
-              setNewRoomData({...newRoomData, name: e.target.value.trim()})
+              setNewRoomData({ ...newRoomData, name: e.target.value.trim() })
             }
             placeholder="Room Name"
           />
-          {newRoomData.participants &&
-            newRoomData.name &&
-            !tempNewParticipant && (
-              <div
-                className="addParticipantAndCreateRoom-button-createRoom_Phone"
-                onClick={createRoom}
-              >
-                {" "}
-                Create Room{" "}
-              </div>
-            )}
+          {newRoomData.participants && newRoomData.name && (
+            <div
+              className="addParticipantAndCreateRoom-button-createRoom_Phone"
+              onClick={createRoom}
+            >
+              {" "}
+              Create Room{" "}
+            </div>
+          )}
         </div>
       </div>
 

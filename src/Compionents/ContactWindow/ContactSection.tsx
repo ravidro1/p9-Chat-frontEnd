@@ -1,9 +1,9 @@
-import react, {useState, useEffect, useContext} from "react";
-import {roomType, TypeDataContext} from "../types";
-import "../Style/contantSection.css";
+import react, { useState, useEffect, useContext } from "react";
+import { roomType, TypeDataContext } from "../../types";
+import "../../Style/contantSection.css";
+import { DataContext } from "../../Contexts/DataContextProvider";
+import ContactWindow_Phone from "../../Phone/ContactSection_Phone";
 import OneContact from "./OneContact";
-import {DataContext} from "../Contexts/DataContextProvider";
-import ContactWindow_Phone from "../Phone/ContactSection_Phone";
 
 interface Props {}
 

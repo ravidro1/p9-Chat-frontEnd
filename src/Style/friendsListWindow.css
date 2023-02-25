@@ -1,0 +1,50 @@
+.ItemsBlocksArea-FriendsListWindow {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+
+  width: 100%;
+  height: 100%;
+}
+
+.main-FriendsListWindow {
+  width: 100%;
+  height: 25%;
+  background-color: #05728f;
+  color: whitesmoke;
+  border-bottom: 1px solid black;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+
+  flex-direction: column;
+
+  font-size: 1.2vw;
+  font-weight: 500;
+  /* padding-inline: 1.5vw; */
+}
+
+.requestButtons-continer-FriendsListWindow {
+  width: 100%;
+  height: 65%;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.requestButtons-FriendsListWindow {
+  width: 90%;
+  height: 95%;
+  background-color: whitesmoke;
+  border-radius: 0.5vw;
+  border: 2px solid black;
+
+  font-size: 0.9vw;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  overflow: hidden;
+}

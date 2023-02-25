@@ -1,9 +1,9 @@
-import {useContext, useEffect, useState} from "react";
-import CreateRoom from "../Compionents/CreateRoom";
-import FriendsListWindow from "../Compionents/FriendsListWindow";
-import MenuIcon from "../Compionents/MenuIcon";
-import {FunctionContext} from "../Contexts/FunctionsContextProvider";
-import {TypeFunctionsContext} from "../types";
+import { useContext, useEffect, useState } from "react";
+import CreateRoom from "../Compionents/Menu/CreateRoom";
+import FriendsListWindow from "../Compionents/Menu/FriendsList/FriendsListWindow";
+import MenuIcon from "../Compionents/Menu/MenuIcon";
+import { FunctionContext } from "../Contexts/FunctionsContextProvider";
+import { TypeFunctionsContext } from "../types";
 
 import "./Phone_Style/menu_Phone.css";
 
@@ -28,7 +28,7 @@ const Menu_Phone: React.FC<Props> = ({
   turnOffTheOtherButtons,
   showFriendsListWindow,
 }) => {
-  const {logout} = useContext(FunctionContext) as TypeFunctionsContext;
+  const { logout } = useContext(FunctionContext) as TypeFunctionsContext;
 
   return (
     <>
@@ -65,6 +65,7 @@ const Menu_Phone: React.FC<Props> = ({
                   : "slide-bck-center"
                 : ""
             }
+            showFriendsListWindow={showFriendsListWindow}
           />
         </div>
       </div>

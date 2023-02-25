@@ -1,6 +1,4 @@
-import axios from "axios";
 import {useEffect, useState} from "react";
-import {useNavigate} from "react-router-dom";
 import {
   idAndTokenType,
   roomType,
@@ -23,12 +21,12 @@ const Data = (): TypeDataContext => {
   >([]);
 
   const [windowWidthForPhone, setWindowWidthForPhone] = useState<boolean>(
-    window.innerWidth < 950
+    window.innerWidth < 800
   );
 
   useEffect(() => {
     const handleWindowResize = () => {
-      setWindowWidthForPhone(window.innerWidth < 950);
+      setWindowWidthForPhone(window.innerWidth < 800);
     };
 
     window.addEventListener("resize", handleWindowResize);

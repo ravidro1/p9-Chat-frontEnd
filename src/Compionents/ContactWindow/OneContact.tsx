@@ -5,14 +5,14 @@ import {
   TypeFunctionsContext,
   TypeMessage,
   TypeSizeContext,
-} from "../types";
-import "../Style/oneContant.css";
-import {DataContext} from "../Contexts/DataContextProvider";
-import {FunctionContext} from "../Contexts/FunctionsContextProvider";
-import {SizeContext} from "../Contexts/SizesContextProvider";
-import {socket} from "../App";
+} from "../../types";
+import "../../Style/oneContant.css";
+import {DataContext} from "../../Contexts/DataContextProvider";
+import {FunctionContext} from "../../Contexts/FunctionsContextProvider";
+import {SizeContext} from "../../Contexts/SizesContextProvider";
+import {socket} from "../../App";
 import axios from "axios";
-import OneContact_Phone from "../Phone/OneContact_Phone";
+import OneContact_Phone from "../../Phone/OneContact_Phone";
 
 interface Props {
   oneRoom: roomType;

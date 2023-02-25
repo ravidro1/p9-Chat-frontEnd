@@ -1,16 +1,15 @@
-import {roomType, TypeDataContext} from "../types";
-import "../Style/chatWindowHeader.css";
-import {socket} from "../App";
-import {useEffect, useState, useContext} from "react";
-import {DataContext} from "../Contexts/DataContextProvider";
-import ChatWindowHeader_Phone from "../Phone/ChatWindowHeader_Phone";
+import { TypeDataContext } from "../../types";
+import "../../Style/chatWindowHeader.css";
+import { useEffect, useState, useContext } from "react";
+import { DataContext } from "../../Contexts/DataContextProvider";
+import ChatWindowHeader_Phone from "../../Phone/ChatWindowHeader_Phone";
 
 interface Props {
   // currentRoom: roomType | undefined;
 }
 
 const ChatWindowHeader: React.FC<Props> = () => {
-  const {currentRoom, typingQueue, windowWidthForPhone} = useContext(
+  const { currentRoom, typingQueue, windowWidthForPhone } = useContext(
     DataContext
   ) as TypeDataContext;
 
