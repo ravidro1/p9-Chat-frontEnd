@@ -1,8 +1,8 @@
-import react, { useContext, useEffect, useState } from "react";
-import { TypeDataContext } from "../../types";
+import react, {useContext, useEffect, useState} from "react";
+import {TypeDataContext} from "../../types";
 import "../../Style/settingsWindow.css";
 import axios from "axios";
-import { DataContext } from "../../Contexts/DataContextProvider";
+import {DataContext} from "../../Contexts/DataContextProvider";
 
 interface Props {
   animationClass: string;
@@ -15,7 +15,7 @@ const SettingsWindow: React.FC<Props> = ({
 
   showSettingsWindow,
 }) => {
-  const { currentUser } = useContext(DataContext) as TypeDataContext;
+  const {currentUser} = useContext(DataContext) as TypeDataContext;
 
   const [newPassword, setNewPassword] = useState<string>("");
   const [newPasswordVetify, setNewPasswordVerify] = useState<string>("");
@@ -25,7 +25,7 @@ const SettingsWindow: React.FC<Props> = ({
   const [changePasswordNotification, setChangePasswordNotification] = useState<{
     text: string;
     color: string;
-  }>({ text: "", color: "" });
+  }>({text: "", color: ""});
 
   const [buttonStyle, setButtonStyle] = useState<react.CSSProperties>({
     cursor: "default",
@@ -36,7 +36,7 @@ const SettingsWindow: React.FC<Props> = ({
     setNewPassword("");
     setNewPasswordVerify("");
     setIsValidPassword(false);
-    setChangePasswordNotification({ text: "", color: "" });
+    setChangePasswordNotification({text: "", color: ""});
     setButtonStyle({
       cursor: "default",
       color: "rgba(0, 0, 0, 0.425)",
@@ -76,13 +76,13 @@ const SettingsWindow: React.FC<Props> = ({
     if (newPassword === newPasswordVetify && newPassword.length >= 8) {
       setButtonStyle({
         cursor: "pointer",
-        color: "black",
+        backgroundColor: "#05728f",
       });
       setIsValidPassword(true);
     } else {
       setButtonStyle({
         cursor: "default",
-        color: "rgba(0, 0, 0, 0.425)",
+        backgroundColor: "#92bbc7",
       });
       setIsValidPassword(false);
     }
@@ -110,13 +110,13 @@ const SettingsWindow: React.FC<Props> = ({
               value={newPasswordVetify}
               onChange={(e) => setNewPasswordVerify(e.target.value)}
               className="ChangePassword-Inputs-SettingsWindow"
-              placeholder="Verify new Password"
+              placeholder="Verify New Password"
             />
           </div>
 
           <div
             className="successOrFailText-SettingsWindow"
-            style={{ color: changePasswordNotification.color }}
+            style={{color: changePasswordNotification.color}}
           >
             {changePasswordNotification.text}
           </div>

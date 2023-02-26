@@ -1,8 +1,7 @@
-import react, { useState, useEffect, useContext } from "react";
-import { roomType, TypeDataContext } from "../../types";
+import react, {useState, useEffect, useContext} from "react";
+import {roomType, TypeDataContext} from "../../types";
 import "../../Style/contantSection.css";
-import { DataContext } from "../../Contexts/DataContextProvider";
-import ContactWindow_Phone from "../../Phone/ContactSection_Phone";
+import {DataContext} from "../../Contexts/DataContextProvider";
 import OneContact from "./OneContact";
 
 interface Props {}
@@ -58,50 +57,41 @@ const ContactWindow: React.FC<Props> = () => {
   };
 
   return (
-    <>
-      {windowWidthForPhone ? (
-        <ContactWindow_Phone
-          searchRoomList={searchRoomList}
-          updateRoomBySearch={updateRoomBySearch}
+    <div className="main-contantSection">
+      <div className="Continer-RoomSearchBox-contantSection">
+        <div className="recentWord-contantSection"> Recent </div>
+        <input
+          className="RoomSearchBox-contantSection"
+          onChange={(e) =>
+            updateRoomBySearch(e.target.value.trim().toLowerCase())
+          }
+          type={"search"}
+          list="rooms"
+          placeholder="Search Room..."
         />
-      ) : (
-        <div className="main-contantSection">
-          <div className="Continer-RoomSearchBox-contantSection">
-            <div className="recentWord-contantSection"> Recent </div>
-            <input
-              className="RoomSearchBox-contantSection"
-              onChange={(e) =>
-                updateRoomBySearch(e.target.value.trim().toLowerCase())
-              }
-              type={"search"}
-              list="rooms"
-              placeholder="Search Room..."
-            />
-          </div>
+      </div>
 
-          <div className="contactList-contactSection">
-            {searchRoomList?.map((oneRoom: roomType, index) => {
-              return <OneContact key={index} oneRoom={oneRoom} />;
-            })}
+      <div className="contactList-contactSection">
+        {searchRoomList?.map((oneRoom: roomType, index) => {
+          return <OneContact key={index} oneRoom={oneRoom} />;
+        })}
 
-            {searchRoomList != undefined &&
-              allUserRooms &&
-              searchRoomList?.length < 1 &&
-              (allUserRooms?.length > 0 ? (
-                <div className="NoMatchingRoomsWereFound">
-                  {" "}
-                  No Matching Rooms Were Found{" "}
-                </div>
-              ) : (
-                <div className="NoMatchingRoomsWereFound">
-                  {" "}
-                  Your Room List Empty{" "}
-                </div>
-              ))}
-          </div>
-        </div>
-      )}
-    </>
+        {searchRoomList != undefined &&
+          allUserRooms &&
+          searchRoomList?.length < 1 &&
+          (allUserRooms?.length > 0 ? (
+            <div className="NoMatchingRoomsWereFound">
+              {" "}
+              No Matching Rooms Were Found{" "}
+            </div>
+          ) : (
+            <div className="NoMatchingRoomsWereFound">
+              {" "}
+              Your Room List Empty{" "}
+            </div>
+          ))}
+      </div>
+    </div>
   );
 };
 

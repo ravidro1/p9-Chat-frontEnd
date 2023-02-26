@@ -1,20 +1,19 @@
-import react, { useContext, useEffect, useState } from "react";
-import { TypeDataContext, TypeMessage } from "../../types";
+import react, {useContext, useEffect, useState} from "react";
+import {TypeDataContext, TypeMessage} from "../../types";
 import ChatWindowContent from "./ChatWindowContent";
 import ChatWindowHeader from "./ChatWindowHeader";
 import ChatWindowSendMessage from "./ChatWindowSendMessage";
 
 import "../../Style/chatWindow.css";
-import "../../Phone/Phone_Style/chatWindow_Phone.css";
-import { DataContext } from "../../Contexts/DataContextProvider";
+import {DataContext} from "../../Contexts/DataContextProvider";
 
-import { useLottie } from "lottie-react";
+import {useLottie} from "lottie-react";
 import robot from "../../assets/113801-robot-green-eyes.json";
 
 interface Props {}
 
 const ChatWindow: React.FC<Props> = ({}) => {
-  const { currentRoom, allUserMessages, windowWidthForPhone } = useContext(
+  const {currentRoom, allUserMessages, windowWidthForPhone} = useContext(
     DataContext
   ) as TypeDataContext;
 
@@ -36,15 +35,10 @@ const ChatWindow: React.FC<Props> = ({}) => {
     loop: true,
   };
 
-  const { View } = useLottie(options);
+  const {View} = useLottie(options);
 
   return (
-    <div
-      className={
-        windowWidthForPhone ? "main-chatWindow_Phone" : "main-chatWindow"
-        // "main-chatWindow"
-      }
-    >
+    <div className={"main-chatWindow"}>
       {currentRoom ? (
         <>
           <ChatWindowHeader />
