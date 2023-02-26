@@ -39,3 +39,18 @@
   height: 85%;
   border-end-end-radius: 0.5vw;
 }
+
+@media only screen and (max-width: 800px) {
+  .blocks-FriendsListWindow {
+    width: 90%;
+    height: 30%;
+  }
+
+  .inputs-FriendsListWindow {
+    font-size: 4.5vw;
+  }
+
+  .inputs-FriendsListWindow::placeholder {
+    font-size: 4.5vw;
+  }
+}

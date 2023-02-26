@@ -40,10 +40,62 @@
 
 @media only screen and (max-width: 950px) {
   .main-ChatWindowHeader {
-    font-size: 3.15vw;
+    width: 100%;
+    height: 10%;
+    background-color: #05728f;
+
+    display: flex;
+    justify-content: flex-start;
+
+    font-size: 5vw;
+
+    color: whitesmoke;
+
+    font-family: "Roboto Condensed", sans-serif;
+  }
+
+  .backArrow-ChatWindowHeader {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 25%;
+
+    font-size: 5vw;
+  }
+
+  .leftSide-ChatWindowHeader {
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-start;
+    flex-direction: column;
+
+    white-space: nowrap;
+
+    width: auto;
+
+    margin: 0;
+    /* padding-left: 4%; */
+    width: 50%;
   }
 
   .rightSide-ChatWindowHeader {
-    font-size: 2.85vw;
+    height: 100%;
+    width: 25%;
+
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
+    flex-direction: column;
+
+    color: rgb(0, 210, 69);
+
+    padding-bottom: 5%;
+    padding-right: 5%;
+    margin: 0;
+
+    font-size: 4vw;
+    align-self: end !important;
+    justify-self: end !important;
   }
 }

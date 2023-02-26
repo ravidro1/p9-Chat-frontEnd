@@ -28,8 +28,15 @@
   padding-right: 1.5%;
 }
 
-/* @media only screen and (max-width: 830px) {
+@media only screen and (max-width: 800px) {
   .logo-NavBar {
-    height: 90px;
+    height: 12vh;
   }
-} */
+
+  .menuIconContiner-navBar {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    padding-right: 5%;
+  }
+}

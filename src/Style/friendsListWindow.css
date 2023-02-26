@@ -48,3 +48,30 @@
 
   overflow: hidden;
 }
+
+@media only screen and (max-width: 800px) {
+  .ItemsBlocksArea-FriendsListWindow {
+    flex-direction: column;
+  }
+
+  .main-FriendsListWindow {
+    height: 30%;
+
+    font-size: 4vw;
+    font-weight: 500;
+  }
+
+  .requestButtons-continer-FriendsListWindow {
+    height: 65%;
+  }
+
+  .requestButtons-FriendsListWindow {
+    width: 90%;
+    height: 95%;
+    background-color: whitesmoke;
+    border-radius: 1vw;
+    border: 2px solid black;
+
+    font-size: 3vw;
+  }
+}
