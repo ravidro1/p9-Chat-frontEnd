@@ -33,7 +33,7 @@
 .signUpButton-signUpPage {
   border: 0.01vw solid black;
   width: 30%;
-  height: 8%;
+  aspect-ratio: 3/1;
   border-radius: 0.4vw;
   display: flex;
   justify-content: center;

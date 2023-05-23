@@ -35,7 +35,7 @@
 .loginButton-loginPage {
   border: 0.01vw solid black;
   width: 30%;
-  height: 8%;
+  aspect-ratio: 3/1;
   border-radius: 0.4vw;
   display: flex;
   justify-content: center;
@@ -69,7 +69,6 @@
   padding-top: 0.3vw;
 
   font-size: 1.15vw;
-
 }
 
 .input-loginPage::placeholder {
@@ -117,7 +116,6 @@
     padding-left: 2vw;
 
     font-size: 3vw;
-
   }
 
   .input-loginPage::placeholder {
