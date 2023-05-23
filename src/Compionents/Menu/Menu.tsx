@@ -6,7 +6,7 @@ import {TypeDataContext, TypeFunctionsContext} from "../../types";
 import CreateRoom from "./CreateRoom";
 import FriendsListWindow from "./FriendsList/FriendsListWindow";
 import MenuIcon from "./MenuIcon";
-import SettingsWindow from "./SettingsWindoow";
+import SettingsWindow from "./SettingsWindow";
 
 interface Props {
   // classes: string;
